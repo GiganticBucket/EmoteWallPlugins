@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const EmoteWallEntryPoint_1 = require("./externaltypes/EmoteWall/EmoteWallEntryPoint");
-let shouldFilterPepeEmotesDefault = false;
+let shouldFilterPepeEmotesDefault = true;
 let shouldFilterPepeEmotes = shouldFilterPepeEmotesDefault;
 let shouldFilterPepeEmotesOption = {
     name: "shouldFilterPepe",

@@ -1,4 +1,4 @@
-let shouldFilterPepeEmotesDefault = false;
+let shouldFilterPepeEmotesDefault = true;
 let shouldFilterPepeEmotes = shouldFilterPepeEmotesDefault;
 let shouldFilterPepeEmotesOption = {
     name: "shouldFilterPepe",
