@@ -7,12 +7,12 @@ let cooperEmoteName = "cooperPlugin.cooper";
 
 registerPlugin({
     name: "Cooper Detector",
-    ModifyEmoteDataList: (message, emoteDataListBuilder) => {
+    ModifyEmoteDataList: (message: TwitchMessage, emoteDataListBuilder: EmoteDataList): void => {
         if (message.text.toLowerCase().split(' ').includes("cooper")) {
             emoteDataListBuilder.add(new EmoteData(cooperEmoteName, "https://giganticbucket.github.io/EmoteWallExtensions/assets/CooperCute.jpg"));
         }
     },
-    ModifyUninitializedOverlayEmotes: (message, overlayEmotes) => {
+    ModifyUninitializedOverlayEmotes: (message: TwitchMessage, overlayEmotes: ReadonlyArray<OverlayEmote>) => {
         var cooperEmotes = overlayEmotes.filter(emote => emote.name == cooperEmoteName);
         if (cooperEmotes.length > 0) {
             let cooperConfigurers = new EmoteConfigurerList(...OverlayEmoteFactory.defaultConfigurers);
