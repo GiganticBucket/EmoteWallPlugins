@@ -4,7 +4,6 @@ let cooperSizeOption = cooperSizeConfigurer.sizeOption;
 cooperSizeOption.name = "cooperSize";
 cooperSizeOption.defaultValueText = defaultCooperSize.toString();
 let cooperEmoteName = "cooperPlugin.cooper";
-
 registerPlugin({
     name: "Cooper Detector",
     ModifyEmoteDataList: (message, emoteDataListBuilder) => {
@@ -19,7 +18,6 @@ registerPlugin({
             cooperConfigurers.removeAllWithName(BoundedStartingSizeConfigurer.name);
             cooperConfigurers.add(cooperSizeConfigurer);
             cooperConfigurers.add(new RandomStartPositionConfigurer());
-
             cooperEmotes.forEach(cooperEmote => {
                 cooperEmote.configurers = cooperConfigurers;
             });

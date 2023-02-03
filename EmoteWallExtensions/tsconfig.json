@@ -1,0 +1,19 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "ES2016",
+    "lib": [ "DOM", "ES2021" ],
+    "outDir": "js_generated",
+    "strict": true,
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "typeRoots": [ "./externaltypes" ],
+    "types": [ "EmoteWall" ],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [ "**/*" ]
+}
