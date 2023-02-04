@@ -42,6 +42,7 @@ interface IEmoteOverlayPlugin {
     overrideDefaultConfigurers?: ReadonlyArray<IOverlayEmoteConfigurer>;
     overrideDefaultBehaviors?: ReadonlyArray<IOverlayEmoteBehavior>;
     options?: ReadonlyArray<IEditableOption>;
+    testButtonClicked?: () => void;
     TakesFullControl?: (message: TwitchMessage) => boolean;
     ModifyEmoteDataList?: (message: TwitchMessage, emoteDataListBuilder: EmoteDataList) => void;
     ModifyUninitializedOverlayEmotes?: (message: TwitchMessage, overlayEmotes: ReadonlyArray<OverlayEmote>) => void;

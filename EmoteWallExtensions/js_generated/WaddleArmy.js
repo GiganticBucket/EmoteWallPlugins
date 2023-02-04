@@ -2,13 +2,56 @@ const hubConnection = new HubConnection("chatHub");
 hubConnection.addHandlers([
     new HubConnectionHandler("WaddleEntrance", handleWaddleEntrance)
 ]);
-const waddleStartVelocity = 250;
 let waddleOpacityBehavior = new OpacityBehavior([[0, 1], [0.9, 1], [1.5, 0.3]]);
-let waddleVelocityBehavior = new VectorVelocityBehavior([[0, waddleStartVelocity], [0.9, waddleStartVelocity], [1.5, 1.8 * waddleStartVelocity]]);
+waddleOpacityBehavior.opacitySpecOption.name = "waddleOpacitySpec";
+let waddleVelocityBehavior = new VectorVelocityBehavior([[0, 250], [0.9, 250], [1.5, 450]]);
+waddleVelocityBehavior.velocitySpecOption.name = "waddleVelocitySpec";
+let defaultNumWaves = 12;
+let numWaves = defaultNumWaves;
+let numWavesOption = {
+    name: "waddleNumWaves",
+    defaultValueText: defaultNumWaves.toString(),
+    trySetValue: (text) => {
+        let num = Number(text);
+        if (Number.isSafeInteger(num) && num >= 1 && num <= 30) {
+            numWaves = num;
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    getCurrentValueText: () => numWaves.toString()
+};
+let defaultNumWaddlesPerWave = 16;
+let numWaddlesPerWave = defaultNumWaddlesPerWave;
+let numWaddlesPerWaveOption = {
+    name: "waddleNumWaddlesPerWave",
+    defaultValueText: defaultNumWaddlesPerWave.toString(),
+    trySetValue: (text) => {
+        let num = Number(text);
+        if (Number.isSafeInteger(num) && num >= 1 && num <= 30) {
+            numWaddlesPerWave = num;
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    getCurrentValueText: () => numWaddlesPerWave.toString()
+};
+registerPlugin({
+    name: "Waddle Army",
+    options: [numWavesOption, numWaddlesPerWaveOption, waddleOpacityBehavior.opacitySpecOption, waddleVelocityBehavior.velocitySpecOption],
+    testButtonClicked() {
+        handleWaddleEntrance(numWaves, numWaddlesPerWave);
+    }
+});
 async function handleWaddleEntrance(numWaves = 12, numWaddlesPerWave = 14) {
     let verticalSpaceOccupiedByWave = window.innerHeight;
     let dimensionsForIndividualWaddle = verticalSpaceOccupiedByWave / numWaddlesPerWave;
-    let secondsBetweenWavesToKeepWavesAdjacent = dimensionsForIndividualWaddle / waddleStartVelocity;
+    // 250 is starting velocity from above, don't have a great way to make this dynamic with that presently
+    let secondsBetweenWavesToKeepWavesAdjacent = dimensionsForIndividualWaddle / 250;
     for (let i = 0; i < numWaves; i++) {
         let waddleEmotesInWave = [];
         for (let j = 0; j < numWaddlesPerWave; j++) {
@@ -33,8 +76,28 @@ class WaddleConfigurer {
     }
 }
 class WaddleAngleChangerBehavior {
+    constructor() {
+        this.name = "Waddle Angle Changer";
+        this.defaultWaddleAngleChangeSeconds = 3;
+        this.waddleAngleChangeSeconds = this.defaultWaddleAngleChangeSeconds;
+        this.waddleAngleChangeSecondsOption = {
+            name: "waddleAngleChangeSeconds",
+            defaultValueText: this.defaultWaddleAngleChangeSeconds.toString(),
+            trySetValue: (text) => {
+                let num = Number(text);
+                if (Number.isSafeInteger(num) && num >= 0) {
+                    this.waddleAngleChangeSeconds = num;
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
+            getCurrentValueText: () => this.waddleAngleChangeSeconds.toString()
+        };
+    }
     apply(overlayEmoteState) {
-        if (overlayEmoteState.elapsedSeconds > 3 && !overlayEmoteState.properties.has("waddleAngleChanged")) {
+        if (overlayEmoteState.elapsedSeconds > this.waddleAngleChangeSeconds && !overlayEmoteState.properties.has("waddleAngleChanged")) {
             overlayEmoteState.properties.set("waddleAngleChanged", true);
             let randomAngle = (Math.random() * Math.PI / 2) - (Math.PI / 4);
             overlayEmoteState.properties.set("angle", randomAngle);
