@@ -35,6 +35,11 @@ declare class ActiveEmotesManager {
  */
 declare function registerPlugin(plugin: IEmoteOverlayPlugin): void;
 declare function addOrUseExistingScriptReference(url: string, callback: () => void): void;
+declare function simulateMessage(messageText: string, channelName: string, username: string): void;
+interface ITestButton {
+    buttonText: string;
+    callback: () => void;
+}
 /**
  * Register your plugin via {@link registerPlugin}
  */
@@ -43,7 +48,7 @@ interface IEmoteOverlayPlugin {
     overrideDefaultConfigurers?: ReadonlyArray<IOverlayEmoteConfigurer>;
     overrideDefaultBehaviors?: ReadonlyArray<IOverlayEmoteBehavior>;
     options?: ReadonlyArray<IEditableOption>;
-    testButtonClicked?: () => void;
+    testButtons?: ReadonlyArray<ITestButton>;
     TakesFullControl?: (message: TwitchMessage) => boolean;
     ModifyEmoteDataList?: (message: TwitchMessage, emoteDataListBuilder: EmoteDataList) => void;
     ModifyUninitializedOverlayEmotes?: (message: TwitchMessage, overlayEmotes: ReadonlyArray<OverlayEmote>) => void;

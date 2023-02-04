@@ -51,9 +51,12 @@ let numWaddlesPerWaveOption = {
 registerPlugin({
     name: "Waddle Army",
     options: [numWavesOption, numWaddlesPerWaveOption, waddleOpacityBehavior.opacitySpecOption, waddleVelocityBehavior.velocitySpecOption],
-    testButtonClicked() {
-        handleWaddleEntrance(numWaves, numWaddlesPerWave);
-    }
+    testButtons: [
+        {
+            buttonText: "Test",
+            callback: () => handleWaddleEntrance(numWaves, numWaddlesPerWave)
+        }
+    ]
 });
 async function handleWaddleEntrance(numWaves = 12, numWaddlesPerWave = 14) {
     let verticalSpaceOccupiedByWave = window.innerHeight;

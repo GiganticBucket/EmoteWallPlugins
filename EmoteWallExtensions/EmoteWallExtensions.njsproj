@@ -48,6 +48,9 @@
     <TypeScriptCompile Include="PepeFilter.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="SlotsResult.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="WaddleArmy.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
