@@ -3,7 +3,9 @@ waddleHubConnection.addHandlers([
     new HubConnectionHandler("WaddleEntrance", handleWaddleEntrance)
 ]);
 
-waddleHubConnection.start();
+addOrUseExistingScriptReference("https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js", () => {
+    waddleHubConnection.start();
+});
 
 let defaultOpacitySpec: [number, number][] = [[0, 1], [0.9, 1], [1.5, 0.3]];
 let waddleOpacityBehavior = new OpacityBehavior(defaultOpacitySpec);

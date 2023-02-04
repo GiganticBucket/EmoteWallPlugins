@@ -34,6 +34,7 @@ declare class ActiveEmotesManager {
  * ```
  */
 declare function registerPlugin(plugin: IEmoteOverlayPlugin): void;
+declare function addOrUseExistingScriptReference(url: string, callback: () => void): void;
 /**
  * Register your plugin via {@link registerPlugin}
  */

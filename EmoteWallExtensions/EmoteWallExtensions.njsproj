@@ -32,9 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="assets\CooperCute.jpg" />
-    <Content Include="js_readable\CooperDetector.js" />
-    <Content Include="js_readable\HelloWorld.js" />
-    <Content Include="js_readable\PepeFilter.js" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
@@ -60,7 +57,6 @@
     <Folder Include="externaltypes\" />
     <Folder Include="externaltypes\EmoteWall\" />
     <Folder Include="js_generated\" />
-    <Folder Include="js_readable\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
