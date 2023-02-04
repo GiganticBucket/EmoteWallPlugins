@@ -1,5 +1,3 @@
-import { EmoteDataList, IEditableOption, registerPlugin, TwitchMessage } from "./externaltypes/EmoteWall/EmoteWallEntryPoint";
-
 let shouldFilterPepeEmotesDefault = true;
 let shouldFilterPepeEmotes = shouldFilterPepeEmotesDefault;
 let shouldFilterPepeEmotesOption: IEditableOption = {

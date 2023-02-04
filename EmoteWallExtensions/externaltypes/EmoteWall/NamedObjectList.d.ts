@@ -1,4 +1,4 @@
-export declare class NamedObjectList<T extends {
+declare class NamedObjectList<T extends {
     name?: string;
 }> {
     private _entries;

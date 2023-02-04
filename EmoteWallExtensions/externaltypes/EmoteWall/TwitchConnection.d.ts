@@ -1,5 +1,3 @@
-import { NamedObjectList } from "./NamedObjectList";
-export { TwitchConnection, TwitchMessage, EmoteData, EmoteOriginKind, EmoteDataList, NamedObjectList };
 declare class EmoteDataList extends NamedObjectList<EmoteData> {
 }
 declare enum EmoteOriginKind {

@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const EmoteWallEntryPoint_1 = require("./externaltypes/EmoteWall/EmoteWallEntryPoint");
 let shouldFilterPepeEmotesDefault = true;
 let shouldFilterPepeEmotes = shouldFilterPepeEmotesDefault;
 let shouldFilterPepeEmotesOption = {
@@ -21,7 +18,7 @@ let shouldFilterPepeEmotesOption = {
     },
     getCurrentValueText: () => shouldFilterPepeEmotes.toString()
 };
-(0, EmoteWallEntryPoint_1.registerPlugin)({
+registerPlugin({
     name: "Pepe Filter",
     ModifyEmoteDataList: (message, emoteDataListBuilder) => {
         if (!shouldFilterPepeEmotes) {

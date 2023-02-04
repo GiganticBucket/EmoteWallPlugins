@@ -32,26 +32,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="assets\CooperCute.jpg" />
-    <Content Include="js_generated\CooperDetector.js" />
-    <Content Include="js_generated\CooperDetector.js.map" />
-    <Content Include="js_generated\HelloWorld.js" />
-    <Content Include="js_generated\HelloWorld.js.map" />
     <Content Include="js_readable\CooperDetector.js" />
     <Content Include="js_readable\HelloWorld.js" />
+    <Content Include="js_readable\PepeFilter.js" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="CooperDetector.ts" />
-    <TypeScriptCompile Include="externaltypes\EmoteWallEntryPoint.d.ts" />
-    <TypeScriptCompile Include="externaltypes\index.d.ts" />
-    <TypeScriptCompile Include="externaltypes\NamedObjectList.d.ts" />
-    <TypeScriptCompile Include="externaltypes\TwitchConnection.d.ts" />
+    <TypeScriptCompile Include="externaltypes\EmoteWall\EmoteWallEntryPoint.d.ts" />
+    <TypeScriptCompile Include="externaltypes\EmoteWall\index.d.ts" />
+    <TypeScriptCompile Include="externaltypes\EmoteWall\NamedObjectList.d.ts" />
+    <TypeScriptCompile Include="externaltypes\EmoteWall\TwitchConnection.d.ts" />
     <TypeScriptCompile Include="HelloWorld.ts" />
+    <TypeScriptCompile Include="PepeFilter.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
     <Folder Include="externaltypes\" />
+    <Folder Include="externaltypes\EmoteWall\" />
     <Folder Include="js_generated\" />
     <Folder Include="js_readable\" />
   </ItemGroup>

@@ -1,5 +1,3 @@
-import { EmoteData, EmoteDataList, EmoteOriginKind, TwitchConnection, TwitchMessage } from "./TwitchConnection";
-import { NamedObjectList } from "./NamedObjectList";
 declare class EmoteConfigurerList extends NamedObjectList<IOverlayEmoteConfigurer> {
 }
 declare class EmoteBehaviorList extends NamedObjectList<IOverlayEmoteBehavior> {
@@ -165,4 +163,3 @@ interface IEditableOption {
     trySetValue(text: string): boolean;
     getCurrentValueText(): string;
 }
-export { IEmoteOverlayPlugin, registerPlugin, IOverlayEmoteConfigurer, IOverlayEmoteBehavior, EmoteOriginKind, TwitchMessage, EmoteConfigurerList, BoundedStartingSizeConfigurer, ExplicitStartingDimensionsConfigurer, BounceOffWallsBehavior, ConstantVelocityBehavior, ActiveEmotesManager, EmoteBehaviorList, EmoteData, EmoteDataList, IEditableOption, NamedObjectList, OpacityBehavior, RandomStartPositionConfigurer, RandomStartVelocityAngleConfigurer, TwitchConnection, OverlayEmote, OverlayEmoteFactory };

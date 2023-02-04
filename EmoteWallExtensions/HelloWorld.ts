@@ -1,5 +1,3 @@
-import { EmoteData, EmoteDataList, registerPlugin, TwitchMessage } from "./externaltypes/EmoteWall/EmoteWallEntryPoint";
-
 registerPlugin({
     name: "Hello World",
     ModifyEmoteDataList(message: TwitchMessage, emoteDataListBuilder: EmoteDataList) {

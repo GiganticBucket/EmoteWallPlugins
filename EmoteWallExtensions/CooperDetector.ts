@@ -1,8 +1,3 @@
-import {
-    TwitchMessage, BoundedStartingSizeConfigurer, registerPlugin, EmoteDataList,
-    OverlayEmote, EmoteData, EmoteConfigurerList, OverlayEmoteFactory, RandomStartPositionConfigurer
-} from "./externaltypes/EmoteWall/EmoteWallEntryPoint";
-
 let defaultCooperSize = 200;
 let cooperSizeConfigurer = new BoundedStartingSizeConfigurer(defaultCooperSize);
 let cooperSizeOption = cooperSizeConfigurer.sizeOption;
