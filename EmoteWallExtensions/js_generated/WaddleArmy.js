@@ -2,10 +2,14 @@ const hubConnection = new HubConnection("chatHub");
 hubConnection.addHandlers([
     new HubConnectionHandler("WaddleEntrance", handleWaddleEntrance)
 ]);
-let waddleOpacityBehavior = new OpacityBehavior([[0, 1], [0.9, 1], [1.5, 0.3]]);
+let defaultOpacitySpec = [[0, 1], [0.9, 1], [1.5, 0.3]];
+let waddleOpacityBehavior = new OpacityBehavior(defaultOpacitySpec);
 waddleOpacityBehavior.opacitySpecOption.name = "waddleOpacitySpec";
-let waddleVelocityBehavior = new VectorVelocityBehavior([[0, 250], [0.9, 250], [1.5, 450]]);
+waddleOpacityBehavior.opacitySpecOption.defaultValueText = JSON.stringify(defaultOpacitySpec);
+let defaultVelocitySpec = [[0, 250], [0.9, 250], [1.5, 450]];
+let waddleVelocityBehavior = new VectorVelocityBehavior(defaultVelocitySpec);
 waddleVelocityBehavior.velocitySpecOption.name = "waddleVelocitySpec";
+waddleVelocityBehavior.velocitySpecOption.defaultValueText = JSON.stringify(defaultVelocitySpec);
 let defaultNumWaves = 12;
 let numWaves = defaultNumWaves;
 let numWavesOption = {
