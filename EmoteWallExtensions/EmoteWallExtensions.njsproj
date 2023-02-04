@@ -43,9 +43,15 @@
     <TypeScriptCompile Include="externaltypes\EmoteWall\EmoteWallEntryPoint.d.ts" />
     <TypeScriptCompile Include="externaltypes\EmoteWall\index.d.ts" />
     <TypeScriptCompile Include="externaltypes\EmoteWall\NamedObjectList.d.ts" />
+    <TypeScriptCompile Include="externaltypes\EmoteWall\SignalRConnection.d.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="externaltypes\EmoteWall\TwitchConnection.d.ts" />
     <TypeScriptCompile Include="HelloWorld.ts" />
     <TypeScriptCompile Include="PepeFilter.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="WaddleArmy.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

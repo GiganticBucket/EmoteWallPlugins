@@ -4,13 +4,13 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "ES2016",
+    "target": "es2017",
     "lib": [ "DOM", "ES2021" ],
     "outDir": "js_generated",
     "skipLibCheck": true,
     "module": "commonjs",
     "forceConsistentCasingInFileNames": true,
-    "noImplicitUseStrict":  true
+    "noImplicitUseStrict": true
   },
   "include": [ "**/*" ],
   "exclude": [ "js_generated/*", "js_readable/*" ]
