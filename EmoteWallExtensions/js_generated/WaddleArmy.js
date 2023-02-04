@@ -1,8 +1,9 @@
-const waddleHubConnection = new HubConnection("chatHub");
-waddleHubConnection.addHandlers([
-    new HubConnectionHandler("WaddleEntrance", handleWaddleEntrance)
-]);
+let waddleHubConnection;
 addOrUseExistingScriptReference("https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js", () => {
+    waddleHubConnection = new HubConnection("chatHub");
+    waddleHubConnection.addHandlers([
+        new HubConnectionHandler("WaddleEntrance", handleWaddleEntrance)
+    ]);
     waddleHubConnection.start();
 });
 let defaultOpacitySpec = [[0, 1], [0.9, 1], [1.5, 0.3]];

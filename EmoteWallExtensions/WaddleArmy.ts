@@ -1,9 +1,10 @@
-const waddleHubConnection = new HubConnection("chatHub");
-waddleHubConnection.addHandlers([
-    new HubConnectionHandler("WaddleEntrance", handleWaddleEntrance)
-]);
+let waddleHubConnection: HubConnection;
 
 addOrUseExistingScriptReference("https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js", () => {
+    waddleHubConnection = new HubConnection("chatHub");
+    waddleHubConnection.addHandlers([
+        new HubConnectionHandler("WaddleEntrance", handleWaddleEntrance)
+    ]);
     waddleHubConnection.start();
 });
 
