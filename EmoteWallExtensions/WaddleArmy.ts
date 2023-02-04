@@ -1,7 +1,9 @@
-const hubConnection = new HubConnection("chatHub");
-hubConnection.addHandlers([
+const waddleHubConnection = new HubConnection("chatHub");
+waddleHubConnection.addHandlers([
     new HubConnectionHandler("WaddleEntrance", handleWaddleEntrance)
 ]);
+
+waddleHubConnection.start();
 
 let defaultOpacitySpec: [number, number][] = [[0, 1], [0.9, 1], [1.5, 0.3]];
 let waddleOpacityBehavior = new OpacityBehavior(defaultOpacitySpec);
