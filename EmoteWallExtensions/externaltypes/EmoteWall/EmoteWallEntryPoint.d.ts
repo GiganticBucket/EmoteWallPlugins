@@ -98,6 +98,27 @@ declare class RandomStartVelocityAngleConfigurer implements IOverlayEmoteConfigu
 declare class RandomStartPositionConfigurer implements IOverlayEmoteConfigurer {
     configure(startingOverlayEmote: OverlayEmote): void;
 }
+declare class InitialPositionConfigurer implements IOverlayEmoteConfigurer {
+    private _left;
+    private _top;
+    constructor(_left: number, _top: number);
+    configure(startingOverlayEmote: OverlayEmote): void;
+}
+declare class InitialVelocityConfigurer implements IOverlayEmoteConfigurer {
+    private _angle;
+    private _speedPixelsPerSecond;
+    constructor(_angle: number, _speedPixelsPerSecond: number);
+    name: string;
+    configure(startingOverlayEmote: OverlayEmote): void;
+}
+declare class GravityBehavior implements IOverlayEmoteBehavior {
+    private _gravityConstant;
+    private _reboundMultiplier;
+    constructor(_gravityConstant: number, _reboundMultiplier: number);
+    name: string;
+    preApply(overlayEmoteState: OverlayEmoteState): void;
+    apply(overlayEmoteState: OverlayEmoteState): void;
+}
 declare class VectorVelocityBehavior implements IOverlayEmoteBehavior {
     protected currentExpandedVelocityChart: [startSeconds: number, startPixelsPerSecond: number, endSeconds: number, endPixelsPerSecond: number][];
     protected currentVelocitySpec: [secondsFromStart: number, pixelsPerSecond: number][];
