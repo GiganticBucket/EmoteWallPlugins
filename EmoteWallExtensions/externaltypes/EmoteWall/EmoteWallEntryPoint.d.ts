@@ -161,7 +161,7 @@ interface IOverlayEmoteConfigurer {
 }
 interface IOverlayEmoteBehavior {
     name?: string;
-    preApply?: (overlayEmoteState: OverlayEmoteState) => void;
+    preApply?(overlayEmoteState: OverlayEmoteState): void;
     apply(overlayEmoteState: OverlayEmoteState): void;
 }
 interface IEditableOption {

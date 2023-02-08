@@ -65,7 +65,6 @@ registerPlugin({
     ]
 });
 
-
 async function handleWaddleEntrance(numWaves: number = 12, numWaddlesPerWave: number = 14) {
     let verticalSpaceOccupiedByWave = window.innerHeight;
     let dimensionsForIndividualWaddle = verticalSpaceOccupiedByWave / numWaddlesPerWave;
