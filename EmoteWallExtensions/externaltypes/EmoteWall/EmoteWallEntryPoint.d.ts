@@ -191,3 +191,4 @@ interface IEditableOption {
     trySetValue(text: string): boolean;
     getCurrentValueText(): string;
 }
+declare function lerp(start: number, end: number, percent: number): number;
