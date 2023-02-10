@@ -66,6 +66,9 @@
     <TypeScriptCompile Include="WaddleArmy.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="WideEmotes.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
