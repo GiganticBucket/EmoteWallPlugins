@@ -36,6 +36,9 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="BulletLauncher.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="CooperDetector.ts" />
     <TypeScriptCompile Include="EmoteExploder.ts">
       <SubType>Code</SubType>
@@ -55,6 +58,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="SlotsResult.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="SpawnOnPerimeter.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="WaddleArmy.ts">
