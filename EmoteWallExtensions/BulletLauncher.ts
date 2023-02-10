@@ -49,6 +49,10 @@ registerPlugin({
                 ActiveEmotesManager.startOverlayEmotes([barrelRollOverlayEmote]);
                 await sleep(delayBetweenLaunchesMS);
             }
+
+            function sleep(ms: number): Promise<void> {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
         }
     }
 });

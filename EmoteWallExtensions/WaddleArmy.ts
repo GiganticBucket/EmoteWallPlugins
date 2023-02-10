@@ -92,6 +92,10 @@ async function handleWaddleEntrance(numWaves: number = 12, numWaddlesPerWave: nu
         await ActiveEmotesManager.startOverlayEmotes(waddleEmotesInWave);
         await sleep(secondsBetweenWavesToKeepWavesAdjacent * 1000);
     }
+
+    function sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
 
 class WaddleConfigurer implements IOverlayEmoteConfigurer {
@@ -136,8 +140,4 @@ class WaddleAngleChangerBehavior implements IOverlayEmoteBehavior {
             overlayEmoteState.properties.set("angle", randomAngle);
         }
     }
-}
-
-function sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

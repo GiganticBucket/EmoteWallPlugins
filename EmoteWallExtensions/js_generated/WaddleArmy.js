@@ -72,6 +72,9 @@ async function handleWaddleEntrance(numWaves = 12, numWaddlesPerWave = 14) {
         await ActiveEmotesManager.startOverlayEmotes(waddleEmotesInWave);
         await sleep(secondsBetweenWavesToKeepWavesAdjacent * 1000);
     }
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
 class WaddleConfigurer {
     constructor(_waddleDimension, _topPosition) {
@@ -114,8 +117,5 @@ class WaddleAngleChangerBehavior {
             overlayEmoteState.properties.set("angle", randomAngle);
         }
     }
-}
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 //# sourceMappingURL=WaddleArmy.js.map
