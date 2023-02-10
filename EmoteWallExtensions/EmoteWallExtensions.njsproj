@@ -37,6 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="CooperDetector.ts" />
+    <TypeScriptCompile Include="EmoteExploder.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="externaltypes\EmoteWall\EmoteWallEntryPoint.d.ts" />
     <TypeScriptCompile Include="externaltypes\EmoteWall\index.d.ts" />
     <TypeScriptCompile Include="externaltypes\EmoteWall\NamedObjectList.d.ts" />
@@ -45,6 +48,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="externaltypes\EmoteWall\TwitchConnection.d.ts" />
     <TypeScriptCompile Include="HelloWorld.ts" />
+    <TypeScriptCompile Include="PeekFromBottom.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="PepeFilter.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
