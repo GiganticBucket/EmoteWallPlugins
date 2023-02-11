@@ -2,6 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "noEmitOnError": true,
+    "allowJs":  true,
     "removeComments": false,
     "sourceMap": true,
     "target": "es2017",
