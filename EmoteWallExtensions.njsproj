@@ -63,7 +63,6 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="referencedtypes\EmoteWallEntryPoint.d.ts" />
-    <TypeScriptCompile Include="referencedtypes\index.d.ts" />
     <TypeScriptCompile Include="referencedtypes\NamedObjectList.d.ts" />
     <TypeScriptCompile Include="referencedtypes\SignalRConnection.d.ts">
       <SubType>Code</SubType>
