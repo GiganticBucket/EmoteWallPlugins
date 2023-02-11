@@ -31,50 +31,48 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="assets\CooperCute.jpg" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="BulletLauncher.ts">
+    <TypeScriptCompile Include="ts_source\BulletLauncher.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="CooperDetector.ts" />
-    <TypeScriptCompile Include="EmoteExploder.ts">
+    <TypeScriptCompile Include="ts_source\CooperDetector.ts" />
+    <TypeScriptCompile Include="ts_source\EmoteExploder.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="externaltypes\EmoteWall\EmoteWallEntryPoint.d.ts" />
-    <TypeScriptCompile Include="externaltypes\EmoteWall\index.d.ts" />
-    <TypeScriptCompile Include="externaltypes\EmoteWall\NamedObjectList.d.ts" />
-    <TypeScriptCompile Include="externaltypes\EmoteWall\SignalRConnection.d.ts">
+    <TypeScriptCompile Include="referencedtypes\EmoteWallEntryPoint.d.ts" />
+    <TypeScriptCompile Include="referencedtypes\index.d.ts" />
+    <TypeScriptCompile Include="referencedtypes\NamedObjectList.d.ts" />
+    <TypeScriptCompile Include="referencedtypes\SignalRConnection.d.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="externaltypes\EmoteWall\TwitchConnection.d.ts" />
-    <TypeScriptCompile Include="HelloWorld.ts" />
-    <TypeScriptCompile Include="PeekFromBottom.ts">
+    <TypeScriptCompile Include="referencedtypes\TwitchConnection.d.ts" />
+    <TypeScriptCompile Include="ts_source\HelloWorld.ts" />
+    <TypeScriptCompile Include="ts_source\PeekFromBottom.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="PepeFilter.ts">
+    <TypeScriptCompile Include="ts_source\PepeFilter.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="SlotsResult.ts">
+    <TypeScriptCompile Include="ts_source\SlotsResult.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="SpawnOnPerimeter.ts">
+    <TypeScriptCompile Include="ts_source\SpawnOnPerimeter.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="WaddleArmy.ts">
+    <TypeScriptCompile Include="ts_source\WaddleArmy.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="WideEmotes.ts">
+    <TypeScriptCompile Include="ts_source\WideEmotes.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\" />
-    <Folder Include="externaltypes\" />
-    <Folder Include="externaltypes\EmoteWall\" />
+    <Folder Include="referencedtypes\" />
     <Folder Include="js_generated\" />
+    <Folder Include="ts_source\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

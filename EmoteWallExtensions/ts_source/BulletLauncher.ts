@@ -21,7 +21,7 @@ registerPlugin({
             let lastLaunchApproximatelyAtSeconds = lastLaunchApproximatelyAtMS / 1000;
             let endTimeSeconds = 2 + lastLaunchApproximatelyAtSeconds;
             let bulletEmote = new OverlayEmote(
-                new EmoteData("barrelRolls.bulletLauncher", "img/bulletlauncher.png"),
+                new EmoteData("barrelRolls.bulletLauncher", "https://giganticbucket.github.io/EmoteWallExtensions/assets/BulletLauncher.png.jpg"),
                 new OverlayEmoteState(2 + lastLaunchApproximatelyAtSeconds),
                 new EmoteConfigurerList(new BulletLauncherConfigurer()),
                 new EmoteBehaviorList(new BulletLauncherBehavior(), new OpacityBehavior([[0, 1], [lastLaunchApproximatelyAtSeconds, 1], [endTimeSeconds, 0]])));
