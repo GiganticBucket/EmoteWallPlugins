@@ -1,6 +1,6 @@
 # EmoteWallExtensions
 
-The Emote Wall loads plain JavaScript (not TypeScript) script files (not modules) which directly reference the APIs on the Emote Wall page itself. These APIs are defined here in the [referencedtypes](EmoteWallExtensions/referencedtypes) folder, which allows Visual Studio to provide IntelliSense/etc. for both TypeScript and JavaScript development. All samples provided were [written in TypeScript](EmoteWallExtensions/ts_source) and [compiled to JavaScript](EmoteWallExtensions/js_generated) which the site can load.
+The Emote Wall loads plain JavaScript (not TypeScript) script files (not modules) which directly reference the APIs on the Emote Wall page itself. These APIs are defined here in the [referencedtypes](referencedtypes) folder, which allows Visual Studio to provide IntelliSense/etc. for both TypeScript and JavaScript development. All samples provided were [written in TypeScript](ts_source) and [compiled to JavaScript](js_generated) which the site can load.
 
 # API Overview
 

@@ -31,6 +31,26 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="js_generated\BulletLauncher.js" />
+    <Content Include="js_generated\BulletLauncher.js.map" />
+    <Content Include="js_generated\CooperDetector.js" />
+    <Content Include="js_generated\CooperDetector.js.map" />
+    <Content Include="js_generated\EmoteExploder.js" />
+    <Content Include="js_generated\EmoteExploder.js.map" />
+    <Content Include="js_generated\HelloWorld.js" />
+    <Content Include="js_generated\HelloWorld.js.map" />
+    <Content Include="js_generated\PeekFromBottom.js" />
+    <Content Include="js_generated\PeekFromBottom.js.map" />
+    <Content Include="js_generated\PepeFilter.js" />
+    <Content Include="js_generated\PepeFilter.js.map" />
+    <Content Include="js_generated\SlotsResult.js" />
+    <Content Include="js_generated\SlotsResult.js.map" />
+    <Content Include="js_generated\SpawnOnPerimeter.js" />
+    <Content Include="js_generated\SpawnOnPerimeter.js.map" />
+    <Content Include="js_generated\WaddleArmy.js" />
+    <Content Include="js_generated\WaddleArmy.js.map" />
+    <Content Include="js_generated\WideEmotes.js" />
+    <Content Include="js_generated\WideEmotes.js.map" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
