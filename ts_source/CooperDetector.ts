@@ -9,7 +9,7 @@ registerPlugin({
     name: "Cooper Detector",
     ModifyEmoteDataList: (message: TwitchMessage, emoteDataListBuilder: EmoteDataList): void => {
         if (message.text.toLowerCase().split(' ').includes("cooper")) {
-            emoteDataListBuilder.add(new EmoteData(cooperEmoteName, "https://giganticbucket.github.io/EmoteWallExtensions/assets/CooperCute.jpg"));
+            emoteDataListBuilder.add(new EmoteData(cooperEmoteName, "https://giganticbucket.github.io/EmoteWallPlugins/assets/CooperCute.jpg"));
         }
     },
     ModifyUninitializedOverlayEmotes: (message: TwitchMessage, overlayEmotes: ReadonlyArray<OverlayEmote>) => {
