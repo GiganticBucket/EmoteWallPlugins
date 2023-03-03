@@ -5,7 +5,7 @@ registerPlugin({
             return;
         }
 
-        let peekEmotes = overlayEmotes.filter(e => e.name == "MuncherPls");
+        let peekEmotes = overlayEmotes.filter(e => e.name == "MuncherPls" || e.name == "MuncherYosh");
         if (peekEmotes.length == 0) {
             return;
         }
