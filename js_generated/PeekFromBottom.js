@@ -1,9 +1,6 @@
 registerPlugin({
     name: "PeekFromBottom",
     ModifyUninitializedOverlayEmotes(message, overlayEmotes) {
-        if (!message.isBroadcaster) {
-            return;
-        }
         let peekEmotes = overlayEmotes.filter(e => e.name == "MuncherPls" || e.name == "MuncherYosh");
         if (peekEmotes.length == 0) {
             return;
