@@ -31,60 +31,13 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="js_generated\BulletLauncher.js" />
-    <Content Include="js_generated\BulletLauncher.js.map" />
-    <Content Include="js_generated\CooperDetector.js" />
-    <Content Include="js_generated\CooperDetector.js.map" />
-    <Content Include="js_generated\EmoteExploder.js" />
-    <Content Include="js_generated\EmoteExploder.js.map" />
-    <Content Include="js_generated\HelloWorld.js" />
-    <Content Include="js_generated\HelloWorld.js.map" />
-    <Content Include="js_generated\PeekFromBottom.js" />
-    <Content Include="js_generated\PeekFromBottom.js.map" />
-    <Content Include="js_generated\PepeFilter.js" />
-    <Content Include="js_generated\PepeFilter.js.map" />
-    <Content Include="js_generated\SlotsResult.js" />
-    <Content Include="js_generated\SlotsResult.js.map" />
-    <Content Include="js_generated\SpawnOnPerimeter.js" />
-    <Content Include="js_generated\SpawnOnPerimeter.js.map" />
-    <Content Include="js_generated\WaddleArmy.js" />
-    <Content Include="js_generated\WaddleArmy.js.map" />
-    <Content Include="js_generated\WideEmotes.js" />
-    <Content Include="js_generated\WideEmotes.js.map" />
+    <Content Include="js_generated\*.js" />
+    <Content Include="js_generated\*.js.map" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="ts_source\BulletLauncher.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ts_source\CooperDetector.ts" />
-    <TypeScriptCompile Include="ts_source\EmoteExploder.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="referencedtypes\EmoteWallEntryPoint.d.ts" />
-    <TypeScriptCompile Include="referencedtypes\NamedObjectList.d.ts" />
-    <TypeScriptCompile Include="referencedtypes\SignalRConnection.d.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="referencedtypes\TwitchConnection.d.ts" />
-    <TypeScriptCompile Include="ts_source\HelloWorld.ts" />
-    <TypeScriptCompile Include="ts_source\PeekFromBottom.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ts_source\PepeFilter.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ts_source\SlotsResult.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ts_source\SpawnOnPerimeter.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ts_source\WaddleArmy.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ts_source\WideEmotes.ts">
+    <TypeScriptCompile Include="ts_source\*.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
