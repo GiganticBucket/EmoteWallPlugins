@@ -115,7 +115,7 @@ declare class GravityBehavior implements IOverlayEmoteBehavior {
     private _gravityConstant;
     private _reboundMultiplier;
     constructor(_gravityConstant: number, _reboundMultiplier: number);
-    name: string;
+    name: "GravityBehavior";
     preApply(overlayEmoteState: OverlayEmoteState): void;
     apply(overlayEmoteState: OverlayEmoteState): void;
 }
@@ -152,6 +152,7 @@ declare class OpacityBehavior implements IOverlayEmoteBehavior {
     private tryParseAndUpdateOpacitySpec;
 }
 declare class BounceOffWallsBehavior implements IOverlayEmoteBehavior {
+    name: "BounceOffWallsBehavior";
     private static topIndex;
     private static rightIndex;
     private static bottomIndex;
@@ -163,6 +164,16 @@ declare class BounceOffWallsBehavior implements IOverlayEmoteBehavior {
     apply(overlayEmoteState: OverlayEmoteState): void;
     reflectAngleX(overlayEmoteState: OverlayEmoteState): void;
     reflectAngleY(overlayEmoteState: OverlayEmoteState): void;
+}
+declare class StartOnSideConfigurer implements IOverlayEmoteConfigurer {
+    private sideToStart;
+    readonly sideNames: string[];
+    static readonly sideToStartDefault = "all";
+    constructor(sideToStart?: string);
+    name: "StartOnSideConfigurer";
+    configure(startingOverlayEmote: OverlayEmote): void;
+    applySideToStart(startingOverlayEmote: OverlayEmote, sideName: string): void;
+    sideToStartOption: IEditableOption;
 }
 declare class OverlayEmoteFactory {
     static defaultStartingSizeConfigurer: BoundedStartingSizeConfigurer;
