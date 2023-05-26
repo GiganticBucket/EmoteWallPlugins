@@ -6,11 +6,11 @@ addOrUseExistingScriptReference("https://cdnjs.cloudflare.com/ajax/libs/microsof
     ]);
     waddleHubConnection.start();
 });
-let defaultOpacitySpec = [[0, 1], [0.9, 1], [1.5, 0.3]];
+let defaultOpacitySpec = [[0, 1], [0.9, 1], [1.5, 0.7]];
 let waddleOpacityBehavior = new OpacityBehavior(defaultOpacitySpec);
 waddleOpacityBehavior.opacitySpecOption.name = "waddleOpacitySpec";
 waddleOpacityBehavior.opacitySpecOption.defaultValueText = JSON.stringify(defaultOpacitySpec);
-let defaultVelocitySpec = [[0, 250], [0.9, 250], [1.5, 450]];
+let defaultVelocitySpec = [[0, 250], [0.9, 250], [1.5, 450], [2.5, 450], [4, 950]];
 let waddleVelocityBehavior = new VectorVelocityBehavior(defaultVelocitySpec);
 waddleVelocityBehavior.velocitySpecOption.name = "waddleVelocitySpec";
 waddleVelocityBehavior.velocitySpecOption.defaultValueText = JSON.stringify(defaultVelocitySpec);
@@ -92,7 +92,7 @@ class WaddleConfigurer {
 class WaddleAngleChangerBehavior {
     constructor() {
         this.name = "Waddle Angle Changer";
-        this.defaultWaddleAngleChangeSeconds = 3;
+        this.defaultWaddleAngleChangeSeconds = 2;
         this.waddleAngleChangeSeconds = this.defaultWaddleAngleChangeSeconds;
         this.waddleAngleChangeSecondsOption = {
             name: "waddleAngleChangeSeconds",

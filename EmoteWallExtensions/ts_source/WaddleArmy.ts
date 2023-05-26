@@ -8,12 +8,12 @@ addOrUseExistingScriptReference("https://cdnjs.cloudflare.com/ajax/libs/microsof
     waddleHubConnection.start();
 });
 
-let defaultOpacitySpec: [number, number][] = [[0, 1], [0.9, 1], [1.5, 0.3]];
+let defaultOpacitySpec: [number, number][] = [[0, 1], [0.9, 1], [1.5, 0.7]];
 let waddleOpacityBehavior = new OpacityBehavior(defaultOpacitySpec);
 waddleOpacityBehavior.opacitySpecOption.name = "waddleOpacitySpec";
 waddleOpacityBehavior.opacitySpecOption.defaultValueText = JSON.stringify(defaultOpacitySpec);
 
-let defaultVelocitySpec: [number, number][] = [[0, 250], [0.9, 250], [1.5, 450]];
+let defaultVelocitySpec: [number, number][] = [[0, 250], [0.9, 250], [1.5, 450], [2.5, 450], [4, 950]];
 let waddleVelocityBehavior = new VectorVelocityBehavior(defaultVelocitySpec);
 waddleVelocityBehavior.velocitySpecOption.name = "waddleVelocitySpec";
 waddleVelocityBehavior.velocitySpecOption.defaultValueText = JSON.stringify(defaultVelocitySpec);
@@ -114,7 +114,7 @@ class WaddleConfigurer implements IOverlayEmoteConfigurer {
 
 class WaddleAngleChangerBehavior implements IOverlayEmoteBehavior {
     name = "Waddle Angle Changer";
-    defaultWaddleAngleChangeSeconds = 3;
+    defaultWaddleAngleChangeSeconds = 2;
     waddleAngleChangeSeconds = this.defaultWaddleAngleChangeSeconds;
 
     waddleAngleChangeSecondsOption: IEditableOption = {
