@@ -120,6 +120,7 @@ declare class GravityBehavior implements IOverlayEmoteBehavior {
     apply(overlayEmoteState: OverlayEmoteState): void;
 }
 declare class VectorVelocityBehavior implements IOverlayEmoteBehavior {
+    name: "VectorVelocityBehavior";
     protected currentExpandedVelocityChart: [startSeconds: number, startPixelsPerSecond: number, endSeconds: number, endPixelsPerSecond: number][];
     protected currentVelocitySpec: [secondsFromStart: number, pixelsPerSecond: number][];
     private static defaultVelocitySpec;

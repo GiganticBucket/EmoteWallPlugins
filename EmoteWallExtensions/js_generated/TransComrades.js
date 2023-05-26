@@ -12,12 +12,13 @@ registerPlugin({
             configurerBottomRight.replaceEntryWithNameOrAppend(InitialPositionConfigurer.name, new StartOnSideConfigurer("bottomright"));
             let configurers = [configurerBottomLeft, configurerBottomRight];
             let behaviors = new EmoteBehaviorList(...OverlayEmoteFactory.defaultBehaviors);
-            behaviors.removeAllWithName(BounceOffWallsBehavior.name);
-            behaviors.removeAllWithName(GravityBehavior.name);
-            behaviors.replaceNamedEntryOrAppend(new OpacityBehavior([[0, 1], [0.2, 0.7], [3.2, 0.5], [4, 0]]));
-            for (let wave = 0; wave < 5; wave++) {
+            behaviors.replaceEntryWithNameOrAppend("BounceOffWallsBehavior", new BounceOffWallsBehavior([false, true, true, true]));
+            behaviors.removeAllWithName("GravityBehavior");
+            behaviors.replaceEntryWithNameOrAppend("VectorVelocityBehavior", new VectorVelocityBehavior([[0, 500]]));
+            behaviors.replaceEntryWithNameOrAppend("OpacityBehavior", new OpacityBehavior([[0, 1], [0.2, 0.7], [3.2, 0.6], [4, 0]]));
+            for (let wave = 0; wave < 4; wave++) {
                 let emotesInWave = [];
-                for (let i = 0; i < 40; i++) {
+                for (let i = 0; i < 50; i++) {
                     emotesInWave.push(new OverlayEmote(new EmoteData("TransgenderPride", "https://static-cdn.jtvnw.net/emoticons/v2/307827377/default/light/3.0"), new OverlayEmoteState(4), configurers[i % 2], behaviors));
                 }
                 ActiveEmotesManager.startOverlayEmotes(emotesInWave);

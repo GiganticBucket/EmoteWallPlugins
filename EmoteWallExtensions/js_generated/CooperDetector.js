@@ -8,7 +8,7 @@ registerPlugin({
     name: "Cooper Detector",
     ModifyEmoteDataList: (message, emoteDataListBuilder) => {
         if (message.text.toLowerCase().split(' ').includes("cooper")) {
-            emoteDataListBuilder.add(new EmoteData(cooperEmoteName, "https://giganticbucket.github.io/EmoteWallPlugins/assets/CooperCute.jpg"));
+            emoteDataListBuilder.add(new EmoteData(cooperEmoteName, "https://giganticbucket.github.io/EmoteWallPlugins/EmoteWallExtensions/assets/CooperCute.jpg"));
         }
     },
     ModifyUninitializedOverlayEmotes: (message, overlayEmotes) => {
