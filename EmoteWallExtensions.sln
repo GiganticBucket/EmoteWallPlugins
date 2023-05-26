@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "EmoteWallExtensions", "EmoteWallExtensions.njsproj", "{3F3216C6-75E7-4F3F-900D-C4BBBA4D0CFB}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "EmoteWallExtensions", "EmoteWallExtensions\EmoteWallExtensions.njsproj", "{3F3216C6-75E7-4F3F-900D-C4BBBA4D0CFB}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "LocalServer", "LocalServer\LocalServer.njsproj", "{ABA5844E-6795-4770-9099-2BC7361E8580}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3F3216C6-75E7-4F3F-900D-C4BBBA4D0CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F3216C6-75E7-4F3F-900D-C4BBBA4D0CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F3216C6-75E7-4F3F-900D-C4BBBA4D0CFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA5844E-6795-4770-9099-2BC7361E8580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA5844E-6795-4770-9099-2BC7361E8580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA5844E-6795-4770-9099-2BC7361E8580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA5844E-6795-4770-9099-2BC7361E8580}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
