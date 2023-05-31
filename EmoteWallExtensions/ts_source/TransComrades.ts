@@ -19,11 +19,11 @@ registerPlugin({
             let configurers = [configurerBottomLeft, configurerBottomRight];
 
             let behaviors = new EmoteBehaviorList(...OverlayEmoteFactory.defaultBehaviors);
-            behaviors.removeAllWithName("BounceOffWallsBehavior");
-            behaviors.removeAllWithName("GravityBehavior");
-            behaviors.removeAllWithName("VectorVelocityBehavior");
-            behaviors.replaceEntryWithNameOrAppend("ConstantVelocityBehavior", new ConstantVelocityBehavior(500));
-            behaviors.replaceEntryWithNameOrAppend("OpacityBehavior", new OpacityBehavior(
+            behaviors.removeAllWithName("BounceOffWalls");
+            behaviors.removeAllWithName("Gravity");
+            behaviors.removeAllWithName("VelocityGraph");
+            behaviors.replaceEntryWithNameOrAppend("VelocityConstant", new ConstantVelocityBehavior(500));
+            behaviors.replaceEntryWithNameOrAppend("Opacity", new OpacityBehavior(
                 AnimationGraph.fromArrays([[0, 1], [0.2, 0.7], [3.2, 0.5], [4, 0]])));
 
             for (let wave = 0; wave < 4; wave++){

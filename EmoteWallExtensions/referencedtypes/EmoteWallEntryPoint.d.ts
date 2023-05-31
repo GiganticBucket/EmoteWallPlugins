@@ -73,16 +73,20 @@ declare class OverlayEmote {
     init(): Promise<void>;
     preAdjustToTime(time: number): boolean;
     adjustToTime(time: number): void;
+    protected _onRemoved: LiteEvent<void>;
+    get Removed(): ILiteEvent<void>;
+    remove(): void;
 }
 declare class ExplicitStartingDimensionsConfigurer implements IOverlayEmoteConfigurer {
     height: number;
     width: number;
     constructor(height: number, width: number);
-    name: "Explicit Starting Dimensions Configurer";
+    name: "ExplicitStartingDimensions";
     configure(startingOverlayEmote: OverlayEmote): void;
 }
 declare class BoundedStartingSizeConfigurer implements IOverlayEmoteConfigurer {
     private _dimension;
+    name: string;
     private static defaultStartingSize;
     get dimension(): number;
     private static _instance;
@@ -91,16 +95,24 @@ declare class BoundedStartingSizeConfigurer implements IOverlayEmoteConfigurer {
     configure(startingOverlayEmote: OverlayEmote): void;
     trySetSize(text: string): boolean;
     sizeOption: IEditableOption;
+    options: IEditableOption[];
 }
-declare class RandomStartVelocityAngleConfigurer implements IOverlayEmoteConfigurer {
+declare class RandomStartDirectionConfigurer implements IOverlayEmoteConfigurer {
+    name: string;
+    private static _instance;
+    static get DefaultInstance(): RandomStartDirectionConfigurer;
     configure(startingOverlayEmote: OverlayEmote): void;
 }
 declare class RandomStartPositionConfigurer implements IOverlayEmoteConfigurer {
+    name: string;
+    private static _instance;
+    static get DefaultInstance(): RandomStartPositionConfigurer;
     configure(startingOverlayEmote: OverlayEmote): void;
 }
 declare class InitialPositionConfigurer implements IOverlayEmoteConfigurer {
     private _left;
     private _top;
+    name: string;
     constructor(_left: number, _top: number);
     configure(startingOverlayEmote: OverlayEmote): void;
 }
@@ -114,88 +126,133 @@ declare class InitialVelocityConfigurer implements IOverlayEmoteConfigurer {
 declare class GravityBehavior implements IOverlayEmoteBehavior {
     private _gravityConstant;
     private _reboundMultiplier;
+    name: string;
     constructor(_gravityConstant: number, _reboundMultiplier: number);
-    name: "GravityBehavior";
     preApply(overlayEmoteState: OverlayEmoteState): void;
     apply(overlayEmoteState: OverlayEmoteState): void;
 }
+declare class RotationSpeedBehavior implements IOverlayEmoteBehavior {
+    name: string;
+    protected animationGraph: AnimationGraph;
+    private static defaultAnimationGraph;
+    private static _instance;
+    static get DefaultInstance(): RotationSpeedBehavior;
+    constructor(animationGraph: AnimationGraph);
+    protected tryUpdateRotationSpec(animationGraph: AnimationGraph): boolean;
+    apply(overlayEmoteState: OverlayEmoteState): void;
+    private tryParseAndUpdateRotationSpec;
+    rotationSpeedOption: IEditableOptionWithVisualizer<AnimationGraph>;
+    options: IEditableOptionWithVisualizer<AnimationGraph>[];
+    protected _onValueChanged: any;
+    get ValueChanged(): ILiteEvent<AnimationGraph>;
+}
+declare class RotationBehavior implements IOverlayEmoteBehavior {
+    name: string;
+    protected animationGraph: AnimationGraph;
+    private static defaultAnimationGraph;
+    private static _instance;
+    static get DefaultInstance(): RotationBehavior;
+    constructor(animationGraph: AnimationGraph);
+    protected tryUpdateRotationSpec(animationGraph: AnimationGraph): boolean;
+    apply(overlayEmoteState: OverlayEmoteState): void;
+    private tryParseAndUpdateRotationSpec;
+    rotationOption: IEditableOptionWithVisualizer<AnimationGraph>;
+    options: IEditableOptionWithVisualizer<AnimationGraph>[];
+    protected _onValueChanged: any;
+    get ValueChanged(): ILiteEvent<AnimationGraph>;
+}
 declare class VectorVelocityBehavior implements IOverlayEmoteBehavior {
-    name: "VectorVelocityBehavior";
-    protected currentExpandedVelocityChart: [startSeconds: number, startPixelsPerSecond: number, endSeconds: number, endPixelsPerSecond: number][];
-    protected currentVelocitySpec: [secondsFromStart: number, pixelsPerSecond: number][];
-    private static defaultVelocitySpec;
+    name: string;
+    protected animationGraph: AnimationGraph;
+    private static defaultAnimationGraph;
     private static _instance;
     static get DefaultInstance(): VectorVelocityBehavior;
-    constructor(velocitySpec: [secondsFromStart: number, pixelsPerSecond: number][]);
-    protected tryUpdateVelocitySpec(velocitySpec: [secondsFromStart: number, pixelsPerSecond: number][]): boolean;
+    constructor(animationGraph: AnimationGraph);
+    protected tryUpdateVelocitySpec(animationGraph: AnimationGraph): boolean;
     apply(overlayEmoteState: OverlayEmoteState): void;
     private tryParseAndUpdateVelocitySpec;
-    velocitySpecOption: IEditableOption;
+    velocitySpecOption: IEditableOptionWithVisualizer<AnimationGraph>;
+    options: IEditableOptionWithVisualizer<AnimationGraph>[];
+    protected _onValueChanged: any;
+    get ValueChanged(): ILiteEvent<AnimationGraph>;
 }
-declare class ConstantVelocityBehavior extends VectorVelocityBehavior implements IOverlayEmoteBehavior {
+declare class ConstantVelocityBehavior implements IOverlayEmoteBehavior {
+    private velocityPixelsPerSecond;
+    name: string;
+    private _vectorVelocityBehavior;
     private static defaultSpeedPixelsPerSecond;
     private static _constantVelocityInstance;
     static get DefaultInstance(): ConstantVelocityBehavior;
     constructor(velocityPixelsPerSecond: number);
     constVelocityOption: IEditableOption;
-    private updateConstVelocity;
+    options: IEditableOption[];
+    private tryUpdateConstVelocity;
+    apply(overlayEmoteState: OverlayEmoteState): void;
 }
 declare class OpacityBehavior implements IOverlayEmoteBehavior {
-    protected currentExpandedOpacityChart: [startSeconds: number, startOpacity: number, endSeconds: number, endOpacity: number][];
-    protected currentOpacitySpec: [secondsFromStart: number, opacity: number][];
-    private static defaultOpacitySpec;
+    name: string;
+    protected animationGraph: AnimationGraph;
+    private static defaultAnimationGraph;
     private static _instance;
     static get DefaultInstance(): OpacityBehavior;
-    constructor(opacitySpec: [secondsFromStart: number, opacity: number][]);
-    tryUpdateOpacitySpec(opacitySpec: [secondsFromStart: number, opacity: number][]): boolean;
+    constructor(animationGraph: AnimationGraph);
+    tryUpdateOpacitySpec(animationGraph: AnimationGraph): boolean;
     apply(overlayEmoteState: OverlayEmoteState): void;
-    opacitySpecOption: IEditableOption;
+    opacitySpecOption: IEditableOptionWithVisualizer<AnimationGraph>;
+    options: IEditableOptionWithVisualizer<AnimationGraph>[];
+    protected _onValueChanged: any;
+    get ValueChanged(): ILiteEvent<AnimationGraph>;
     private tryParseAndUpdateOpacitySpec;
 }
 declare class BounceOffWallsBehavior implements IOverlayEmoteBehavior {
-    name: "BounceOffWallsBehavior";
+    name: string;
     private static topIndex;
     private static rightIndex;
     private static bottomIndex;
     private static leftIndex;
     private static defaultSidesToBounce;
     private _sidesToBounce;
+    private static _instance;
+    static get DefaultInstance(): BounceOffWallsBehavior;
     constructor(sidesToBounceTRBL?: boolean[]);
+    updateSidesToBounce(sidesToBounceTRBL: boolean[]): void;
     preApply(overlayEmoteState: OverlayEmoteState): boolean;
     apply(overlayEmoteState: OverlayEmoteState): void;
     reflectAngleX(overlayEmoteState: OverlayEmoteState): void;
     reflectAngleY(overlayEmoteState: OverlayEmoteState): void;
+    bounceOption: IEditableOption;
+    options: IEditableOption[];
 }
 declare class StartOnSideConfigurer implements IOverlayEmoteConfigurer {
     private sideToStart;
-    readonly sideNames: string[];
+    name: string;
+    static sideNames: string[];
     static readonly sideToStartDefault = "all";
+    private static _instance;
+    static get DefaultInstance(): StartOnSideConfigurer;
     constructor(sideToStart?: string);
-    name: "StartOnSideConfigurer";
     configure(startingOverlayEmote: OverlayEmote): void;
     applySideToStart(startingOverlayEmote: OverlayEmote, sideName: string): void;
     sideToStartOption: IEditableOption;
+    options: IEditableOption[];
 }
 declare class OverlayEmoteFactory {
-    static defaultStartingSizeConfigurer: BoundedStartingSizeConfigurer;
-    static defaultRandomStartPositionConfigurer: RandomStartPositionConfigurer;
-    static defaultRandomStartVelocityAngleConfigurer: RandomStartVelocityAngleConfigurer;
     static defaultConfigurers: ReadonlyArray<IOverlayEmoteConfigurer>;
-    static defaultOpacityBehavior: OpacityBehavior;
-    static defaultVectorVelocityBehavior: VectorVelocityBehavior;
-    static defaultBounceOffWallsBehavior: BounceOffWallsBehavior;
     static defaultBehaviors: ReadonlyArray<IOverlayEmoteBehavior>;
-    static defaultDuration: number;
+    static excludedDefaultConfigurers: IOverlayEmoteConfigurer[];
+    static excludedDefaultBehaviors: IOverlayEmoteBehavior[];
     static createDefault(emoteData: EmoteData): OverlayEmote;
 }
 interface IOverlayEmoteConfigurer {
-    name?: string;
+    name: string;
     configure(startingOverlayEmote: OverlayEmote): void;
+    options?: ReadonlyArray<IEditableOption>;
 }
 interface IOverlayEmoteBehavior {
-    name?: string;
+    name: string;
     preApply?(overlayEmoteState: OverlayEmoteState): void;
     apply(overlayEmoteState: OverlayEmoteState): void;
+    options?: ReadonlyArray<IEditableOption>;
 }
 interface IEditableOption {
     name: string;
@@ -203,4 +260,9 @@ interface IEditableOption {
     trySetValue(text: string): boolean;
     getCurrentValueText(): string;
 }
-declare function lerp(start: number, end: number, percent: number): number;
+interface IEditableOptionWithVisualizer<T> extends IEditableOption {
+    kind: string;
+    getCurrentValue(): T;
+    setCurrentValue(t: T): void;
+    get valueChanged(): ILiteEvent<T>;
+}

@@ -16,7 +16,7 @@ registerPlugin({
             let lastLaunchApproximatelyAtMS = initialSleepMS + delayBetweenLaunchesMS * (barrelRolls.length - 1);
             let lastLaunchApproximatelyAtSeconds = lastLaunchApproximatelyAtMS / 1000;
             let endTimeSeconds = 2 + lastLaunchApproximatelyAtSeconds;
-            let bulletEmote = new OverlayEmote(new EmoteData("barrelRolls.bulletLauncher", "https://giganticbucket.github.io/EmoteWallPlugins/EmoteWallExtensions/assets/BulletLauncher.png"), new OverlayEmoteState(2 + lastLaunchApproximatelyAtSeconds), new EmoteConfigurerList(new BulletLauncherConfigurer()), new EmoteBehaviorList(new BulletLauncherBehavior(), new OpacityBehavior([[0, 1], [lastLaunchApproximatelyAtSeconds, 1], [endTimeSeconds, 0]])));
+            let bulletEmote = new OverlayEmote(new EmoteData("barrelRolls.bulletLauncher", "https://giganticbucket.github.io/EmoteWallPlugins/EmoteWallExtensions/assets/BulletLauncher.png"), new OverlayEmoteState(2 + lastLaunchApproximatelyAtSeconds), new EmoteConfigurerList(new BulletLauncherConfigurer()), new EmoteBehaviorList(new BulletLauncherBehavior(), new OpacityBehavior(AnimationGraph.fromArrays([[0, 1], [lastLaunchApproximatelyAtSeconds, 1], [endTimeSeconds, 0]]))));
             ActiveEmotesManager.startOverlayEmotes([bulletEmote]);
             await sleep(initialSleepMS);
             let numToFire = Math.min(barrelRolls.length, 20);
@@ -26,7 +26,7 @@ registerPlugin({
                 let startTop = bulletEmote.state.properties.get("top") +
                     (movingDown ? 25 : -6);
                 let configurers = new EmoteConfigurerList(new BoundedStartingSizeConfigurer(dimension), new InitialVelocityConfigurer(angle, fuzzNumber(300, 50)), new InitialPositionConfigurer(0, startTop));
-                let behaviors = new EmoteBehaviorList(new GravityBehavior(450, 0.85), new OpacityBehavior([[0, 1], [14, 1], [16, 0]]));
+                let behaviors = new EmoteBehaviorList(new GravityBehavior(450, 0.85), new OpacityBehavior(AnimationGraph.fromArrays([[0, 1], [14, 1], [16, 0]])));
                 let barrelRollOverlayEmote = new OverlayEmote(barrelRolls[i], new OverlayEmoteState(12), configurers, behaviors);
                 ActiveEmotesManager.startOverlayEmotes([barrelRollOverlayEmote]);
                 await sleep(delayBetweenLaunchesMS);
