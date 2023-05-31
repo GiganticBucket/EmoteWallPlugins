@@ -41,7 +41,7 @@ async function showSlotsResult(message) {
     if (won) {
         let celebrateEmote = message.emotes[message.emotes.length - 1];
         for (let i = 0; i < 10; i++) {
-            overlayEmotes.push(new OverlayEmote(celebrateEmote, new OverlayEmoteState(6), new EmoteConfigurerList(new RandomStartPositionConfigurer(), new RandomStartVelocityAngleConfigurer()), new EmoteBehaviorList(new ConstantVelocityBehavior(200), new OpacityBehavior([[0, 1], [3, 1], [6, 0]]))));
+            overlayEmotes.push(new OverlayEmote(celebrateEmote, new OverlayEmoteState(6), new EmoteConfigurerList(new RandomStartPositionConfigurer(), new RandomStartDirectionConfigurer()), new EmoteBehaviorList(new ConstantVelocityBehavior(200), new OpacityBehavior(AnimationGraph.fromArrays([[0, 1], [3, 1], [6, 0]])))));
         }
     }
     await ActiveEmotesManager.startOverlayEmotes(overlayEmotes);

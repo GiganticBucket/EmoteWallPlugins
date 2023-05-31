@@ -58,8 +58,9 @@ async function showSlotsResult(message: TwitchMessage) {
             overlayEmotes.push(new OverlayEmote(
                 celebrateEmote,
                 new OverlayEmoteState(6),
-                new EmoteConfigurerList(new RandomStartPositionConfigurer(), new RandomStartVelocityAngleConfigurer()),
-                new EmoteBehaviorList(new ConstantVelocityBehavior(200), new OpacityBehavior([[0, 1], [3, 1], [6, 0]]))
+                new EmoteConfigurerList(new RandomStartPositionConfigurer(), new RandomStartDirectionConfigurer()),
+                new EmoteBehaviorList(new ConstantVelocityBehavior(200),
+                    new OpacityBehavior(AnimationGraph.fromArrays([[0, 1], [3, 1], [6, 0]])))
             ));
         }
     }

@@ -24,7 +24,8 @@ registerPlugin({
                 new EmoteData("barrelRolls.bulletLauncher", "https://giganticbucket.github.io/EmoteWallPlugins/EmoteWallExtensions/assets/BulletLauncher.png"),
                 new OverlayEmoteState(2 + lastLaunchApproximatelyAtSeconds),
                 new EmoteConfigurerList(new BulletLauncherConfigurer()),
-                new EmoteBehaviorList(new BulletLauncherBehavior(), new OpacityBehavior([[0, 1], [lastLaunchApproximatelyAtSeconds, 1], [endTimeSeconds, 0]])));
+                new EmoteBehaviorList(new BulletLauncherBehavior(), new OpacityBehavior(
+                    AnimationGraph.fromArrays([[0, 1], [lastLaunchApproximatelyAtSeconds, 1], [endTimeSeconds, 0]]))));
             ActiveEmotesManager.startOverlayEmotes([bulletEmote]);
 
             await sleep(initialSleepMS);
@@ -43,7 +44,7 @@ registerPlugin({
 
                 let behaviors = new EmoteBehaviorList(
                     new GravityBehavior(450, 0.85),
-                    new OpacityBehavior([[0, 1], [14, 1], [16, 0]]));
+                    new OpacityBehavior(AnimationGraph.fromArrays([[0, 1], [14, 1], [16, 0]])));
 
                 let barrelRollOverlayEmote = new OverlayEmote(barrelRolls[i], new OverlayEmoteState(12), configurers, behaviors);
                 ActiveEmotesManager.startOverlayEmotes([barrelRollOverlayEmote]);
