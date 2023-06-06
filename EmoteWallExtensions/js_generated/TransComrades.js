@@ -12,7 +12,7 @@ registerPlugin({
             configurerBottomRight.replaceEntryWithNameOrAppend(InitialPositionConfigurer.name, new StartOnSideConfigurer("bottomright"));
             let configurers = [configurerBottomLeft, configurerBottomRight];
             let behaviors = new EmoteBehaviorList(...OverlayEmoteFactory.defaultBehaviors);
-            behaviors.removeAllWithName("BounceOffWalls");
+            behaviors.replaceEntryWithNameOrAppend("BounceOffWalls", new BounceOffWallsBehavior([false, true, true, true]));
             behaviors.removeAllWithName("Gravity");
             behaviors.removeAllWithName("VelocityGraph");
             behaviors.replaceEntryWithNameOrAppend("VelocityConstant", new ConstantVelocityBehavior(500));
