@@ -20,7 +20,7 @@ let shouldFilterPepeEmotesOption: IEditableOption = {
 };
 
 registerPlugin({
-    name: "Pepe Filter",
+    name: "PepeFilter",
     ModifyEmoteDataList: (message: TwitchMessage, emoteDataListBuilder: EmoteDataList) => {
         if (!shouldFilterPepeEmotes) {
             return;

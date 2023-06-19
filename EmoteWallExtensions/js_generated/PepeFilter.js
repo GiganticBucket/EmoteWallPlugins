@@ -19,7 +19,7 @@ let shouldFilterPepeEmotesOption = {
     getCurrentValueText: () => shouldFilterPepeEmotes.toString()
 };
 registerPlugin({
-    name: "Pepe Filter",
+    name: "PepeFilter",
     ModifyEmoteDataList: (message, emoteDataListBuilder) => {
         if (!shouldFilterPepeEmotes) {
             return;

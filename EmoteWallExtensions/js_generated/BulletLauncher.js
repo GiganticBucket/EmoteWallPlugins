@@ -1,5 +1,5 @@
 registerPlugin({
-    name: "Barrel Roll",
+    name: "BarrelRoll",
     ModifyEmoteDataList(message, emoteDataListBuilder) {
         const barrelRollEmoteNames = ["gigant15BarrelRoll"];
         let barrelRolls = emoteDataListBuilder.valuesSnapshot.filter(e => barrelRollEmoteNames.includes(e.name));

@@ -7,7 +7,7 @@ let numPerCornerPerWave = new BoundedIntegerOption("numPerCornerPerWave", 10, 2,
 let millisecondsBetweenWaves = new BoundedIntegerOption("millisecondsBetweenWaves", 500, 50, 1000);
 
 registerPlugin({
-    name: "Trans Comrades",
+    name: "TransComrades",
     editableBehaviors: [transPrideOpacityBehavior, transPrideConstVelocityBehavior],
     options: [numPrideWavesOption, numPerCornerPerWave, millisecondsBetweenWaves],
     ModifyEmoteDataList(message: TwitchMessage, emoteDataListBuilder: EmoteDataList) {

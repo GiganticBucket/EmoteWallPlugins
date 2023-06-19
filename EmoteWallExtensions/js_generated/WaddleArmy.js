@@ -45,7 +45,7 @@ let numWaddlesPerWaveOption = {
     getCurrentValueText: () => numWaddlesPerWave.toString()
 };
 registerPlugin({
-    name: "Waddle Army",
+    name: "WaddleArmy",
     editableBehaviors: [waddleOpacityBehavior, waddleVelocityBehavior],
     options: [numWavesOption, numWaddlesPerWaveOption],
     testButtons: [

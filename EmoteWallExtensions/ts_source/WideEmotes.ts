@@ -1,5 +1,5 @@
 registerPlugin({
-    name: "Wide Emotes",
+    name: "WideEmotes",
     ModifyUninitializedOverlayEmotes(message: TwitchMessage, overlayEmotes: readonly OverlayEmote[]) {
         let lowercaseWords = message.text.toLowerCase().split(' ');
         if (lowercaseWords.includes("wide") || lowercaseWords.includes("w!")) {

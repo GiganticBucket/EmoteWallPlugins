@@ -1,5 +1,5 @@
 registerPlugin({
-    name: "Slots Result Viewer",
+    name: "SlotsResults",
     TakesFullControl(message: TwitchMessage) {
         if (message.tags.username.toLowerCase() == "giganticbucketbot" && /You got .* \| .* \| .*/.test(message.text) && message.emotes.length >= 4) {
             showSlotsResult(message);

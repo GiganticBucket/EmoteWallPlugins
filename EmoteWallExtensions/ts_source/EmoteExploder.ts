@@ -1,5 +1,5 @@
 registerPlugin({
-    name: "Emote Exploder",
+    name: "EmoteExploder",
     ModifyEmoteDataList: (message: TwitchMessage, emoteDataListBuilder: EmoteDataList): void => {
         if (!message.isBroadcaster) {
             return;

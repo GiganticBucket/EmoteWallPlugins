@@ -1,5 +1,5 @@
 registerPlugin({
-    name: "Emote Exploder",
+    name: "EmoteExploder",
     ModifyEmoteDataList: (message, emoteDataListBuilder) => {
         if (!message.isBroadcaster) {
             return;

@@ -1,5 +1,5 @@
 registerPlugin({
-    name: "Barrel Roll",
+    name: "BarrelRoll",
     ModifyEmoteDataList(message: TwitchMessage, emoteDataListBuilder: EmoteDataList) {
         const barrelRollEmoteNames: string[] = ["gigant15BarrelRoll"];
 

@@ -6,7 +6,7 @@ cooperSizeOption.defaultValueText = defaultCooperSize.toString();
 let cooperEmoteName = "cooperPlugin.cooper";
 
 registerPlugin({
-    name: "Cooper Detector",
+    name: "CooperDetector",
     ModifyEmoteDataList: (message: TwitchMessage, emoteDataListBuilder: EmoteDataList): void => {
         if (message.text.toLowerCase().split(' ').includes("cooper")) {
             emoteDataListBuilder.add(new EmoteData(cooperEmoteName, "https://giganticbucket.github.io/EmoteWallPlugins/EmoteWallExtensions/assets/CooperCute.jpg"));
