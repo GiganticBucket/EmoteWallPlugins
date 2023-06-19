@@ -14,10 +14,24 @@ let server = http.createServer(function (request, response) {
     }
     if (urlWithoutQueryString == "/") {
         response.writeHead(200, { 'Content-Type': 'text/plain' });
-        response.end('Server Running...\n');
+        let explanation = `To test your extensions: \n\n`;
+        explanation += `1) Load EmoteWallOverlay.html\n`;
+        explanation += `2) Ensure your up-to-date JS file is in the js_generated directory (even if you've written it directly)\n`;
+        explanation += `3) "Add External Plugin from URL" using http://localhost:${port}/yourExtensionName.js`;
+        response.end('Server Running...\n\n' + explanation);
         return;
     }
-    let filePath = '../EmoteWallExtensions/js_generated' + urlWithoutQueryString;
+    let filePath;
+    if (urlWithoutQueryString.endsWith(".js")) {
+        filePath = '../EmoteWallExtensions/js_generated' + urlWithoutQueryString;
+    }
+    else if (urlWithoutQueryString.endsWith(".ts")) {
+        filePath = '../EmoteWallExtensions/ts_source' + urlWithoutQueryString;
+    }
+    else {
+        console.log("Extension not recognized");
+        return;
+    }
     console.log("Checking for file " + filePath);
     fs.readFile(filePath, function (error, content) {
         if (error) {
