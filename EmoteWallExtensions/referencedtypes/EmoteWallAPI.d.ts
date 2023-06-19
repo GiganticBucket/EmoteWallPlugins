@@ -62,11 +62,22 @@ interface IEmoteOverlayPlugin {
      * May be serialized to the config URL, as well as for display in config UI
      */
     name: string;
+    /**
+     * Configurers used by the plugin which may be individually enabled/disabled, tracked for performance purposes,
+     * and configured in the UI using any {@link IEditableOption}s provided by the Configurer (which should then *not*
+     * be included in the {@link options} array for the plugin itself).
+     */
     editableConfigurers?: ReadonlyArray<IOverlayEmoteConfigurer>;
+    /**
+     * Behaviors used by the plugin which may be individually enabled/disabled, tracked for performance purposes,
+     * and configured in the UI using any {@link IEditableOption}s provided by the Behavior (which should then *not*
+     * be included in the {@link options} array for the plugin itself).
+     */
     editableBehaviors?: ReadonlyArray<IOverlayEmoteBehavior>;
     /**
      * Plugin-wide options to show in the configuration UI. Customized values will be persisted to URLs and
-     * applied after reload. Individual default Configurers and Behaviors can provide their own options as well.
+     * applied after reload. Individual default Configurers and Behaviors can provide their own options as well,
+     * and those should not be re-included here.
      */
     options?: ReadonlyArray<IEditableOption>;
     /**
@@ -89,6 +100,17 @@ interface IEmoteOverlayPlugin {
      * have all default Configurers and Behaviors attached. Those can be modified at this time.
      */
     ModifyUninitializedOverlayEmotes?: (message: TwitchMessage, overlayEmotes: ReadonlyArray<OverlayEmote>) => void;
+}
+declare class BoundedIntegerOption implements IEditableOption {
+    readonly name: string;
+    readonly lowerBound: number;
+    readonly upperBound: number;
+    readonly defaultValueText: string;
+    currentValue: number;
+    description: string;
+    constructor(name: string, defaultValue: number, lowerBound: number, upperBound: number);
+    getCurrentValueText(): string;
+    trySetValue(text: string): boolean;
 }
 declare class OverlayEmoteState {
     duration: number;
