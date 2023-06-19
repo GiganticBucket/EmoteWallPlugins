@@ -15,10 +15,9 @@ registerPlugin({
     ModifyUninitializedOverlayEmotes: (message: TwitchMessage, overlayEmotes: ReadonlyArray<OverlayEmote>) => {
         var cooperEmotes = overlayEmotes.filter(emote => emote.name == cooperEmoteName);
         if (cooperEmotes.length > 0) {
-            let cooperConfigurers = new EmoteConfigurerList(...OverlayEmoteFactory.defaultConfigurers);
-            cooperConfigurers.removeAllWithName(BoundedStartingSizeConfigurer.name);
-            cooperConfigurers.add(cooperSizeConfigurer);
-            cooperConfigurers.add(new RandomStartPositionConfigurer());
+            let cooperConfigurers = cooperEmotes[0].configurers;
+            cooperConfigurers.removeAllWithName(BoundedStartingSizeConfigurer.name); // ?
+            cooperConfigurers.add(cooperSizeConfigurer); // ?
 
             cooperEmotes.forEach(cooperEmote => {
                 cooperEmote.configurers = cooperConfigurers;

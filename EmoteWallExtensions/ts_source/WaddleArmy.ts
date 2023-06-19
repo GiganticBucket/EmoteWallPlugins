@@ -10,13 +10,9 @@ addOrUseExistingScriptReference("https://cdnjs.cloudflare.com/ajax/libs/microsof
 
 let defaultWaddleOpacitySpec: [number, number][] = [[0, 1], [0.9, 1], [1.5, 0.7]];
 let waddleOpacityBehavior = new OpacityBehavior(AnimationGraph.fromArrays(defaultWaddleOpacitySpec));
-waddleOpacityBehavior.opacitySpecOption.name = "waddleOpacitySpec";
-waddleOpacityBehavior.opacitySpecOption.defaultValueText = JSON.stringify(defaultWaddleOpacitySpec);
 
 let defaultWaddleVelocitySpec: [number, number][] = [[0, 250], [0.9, 250], [1.5, 450], [2.5, 450], [4, 950]];
 let waddleVelocityBehavior = new VectorVelocityBehavior(AnimationGraph.fromArrays(defaultWaddleVelocitySpec));
-waddleVelocityBehavior.velocitySpecOption.name = "waddleVelocitySpec";
-waddleVelocityBehavior.velocitySpecOption.defaultValueText = JSON.stringify(defaultWaddleVelocitySpec);
 
 let defaultNumWaves = 12;
 let numWaves = defaultNumWaves;
@@ -56,7 +52,8 @@ let numWaddlesPerWaveOption: IEditableOption = {
 
 registerPlugin({
     name: "Waddle Army",
-    options: [numWavesOption, numWaddlesPerWaveOption, waddleOpacityBehavior.opacitySpecOption, waddleVelocityBehavior.velocitySpecOption],
+    editableBehaviors: [waddleOpacityBehavior, waddleVelocityBehavior],
+    options: [numWavesOption, numWaddlesPerWaveOption],
     testButtons: [
         {
             buttonText: "Test",
