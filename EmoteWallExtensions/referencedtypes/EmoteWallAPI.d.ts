@@ -266,13 +266,13 @@ interface IEmoteOverlayPlugin {
      * and configured in the UI using any {@link IEditableOption}s provided by the Configurer (which should then *not*
      * be included in the {@link options} array for the plugin itself).
      */
-    editableConfigurers?: ReadonlyArray<IOverlayEmoteConfigurer>;
+    customizableConfigurers?: ReadonlyArray<IOverlayEmoteConfigurer>;
     /**
      * Behaviors used by the plugin which may be individually enabled/disabled, tracked for performance purposes,
      * and configured in the UI using any {@link IEditableOption}s provided by the Behavior (which should then *not*
      * be included in the {@link options} array for the plugin itself).
      */
-    editableBehaviors?: ReadonlyArray<IOverlayEmoteBehavior>;
+    customizableBehaviors?: ReadonlyArray<IOverlayEmoteBehavior>;
     /**
      * Plugin-wide options to show in the configuration UI. Customized values will be persisted to URLs and
      * applied after reload. Individual default Configurers and Behaviors can provide their own options as well,
@@ -311,9 +311,12 @@ declare class BoundedIntegerOption implements IEditableOption {
     getCurrentValueText(): string;
     trySetValue(text: string): boolean;
 }
+declare class PropertyBag extends Map<string, any> {
+    getOrCreate<T>(key: string, factory: () => T): T;
+}
 declare class OverlayEmoteState {
     duration: number;
-    properties: Map<string, any>;
+    properties: PropertyBag;
     constructor(duration: number);
     image: HTMLImageElement;
     elapsedSeconds: number;
