@@ -1,5 +1,5 @@
 const transPrideOpacityBehavior = new OpacityBehavior(AnimationGraph.fromArrays([[0, 1], [0.2, 0.7], [3.2, 0.5], [4, 0]]));
-const transPrideConstVelocityBehavior = new ConstantVelocityBehavior(500);
+const transPrideConstVelocityBehavior = new VectorVelocityBehavior(AnimationGraph.fromArrays([[0, 300], [5, 600]]));
 const transPrideBehaviorList = new EmoteBehaviorList(transPrideOpacityBehavior, transPrideConstVelocityBehavior);
 
 let numPrideWavesOption = new BoundedIntegerOption("numWaves", 3, 1, 50);
