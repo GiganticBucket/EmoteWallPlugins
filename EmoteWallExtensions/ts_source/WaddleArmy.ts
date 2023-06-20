@@ -52,7 +52,7 @@ let numWaddlesPerWaveOption: IEditableOption = {
 
 registerPlugin({
     name: "WaddleArmy",
-    editableBehaviors: [waddleOpacityBehavior, waddleVelocityBehavior],
+    customizableBehaviors: [waddleOpacityBehavior, waddleVelocityBehavior],
     options: [numWavesOption, numWaddlesPerWaveOption],
     testButtons: [
         {

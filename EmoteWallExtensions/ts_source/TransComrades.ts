@@ -8,7 +8,7 @@ let millisecondsBetweenWaves = new BoundedIntegerOption("millisecondsBetweenWave
 
 registerPlugin({
     name: "TransComrades",
-    editableBehaviors: [transPrideOpacityBehavior, transPrideConstVelocityBehavior],
+    customizableBehaviors: [transPrideOpacityBehavior, transPrideConstVelocityBehavior],
     options: [numPrideWavesOption, numPerCornerPerWave, millisecondsBetweenWaves],
     ModifyEmoteDataList(message: TwitchMessage, emoteDataListBuilder: EmoteDataList) {
         if (message.text.includes("TRANS COMRADES")) {

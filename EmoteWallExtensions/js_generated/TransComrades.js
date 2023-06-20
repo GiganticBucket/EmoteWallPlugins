@@ -6,7 +6,7 @@ let numPerCornerPerWave = new BoundedIntegerOption("numPerCornerPerWave", 10, 2,
 let millisecondsBetweenWaves = new BoundedIntegerOption("millisecondsBetweenWaves", 500, 50, 1000);
 registerPlugin({
     name: "TransComrades",
-    editableBehaviors: [transPrideOpacityBehavior, transPrideConstVelocityBehavior],
+    customizableBehaviors: [transPrideOpacityBehavior, transPrideConstVelocityBehavior],
     options: [numPrideWavesOption, numPerCornerPerWave, millisecondsBetweenWaves],
     ModifyEmoteDataList(message, emoteDataListBuilder) {
         if (message.text.includes("TRANS COMRADES")) {
