@@ -311,6 +311,15 @@ declare class BoundedIntegerOption implements IEditableOption {
     getCurrentValueText(): string;
     trySetValue(text: string): boolean;
 }
+declare class BooleanOption implements IEditableOption {
+    readonly name: string;
+    readonly defaultValueText: string;
+    currentValue: boolean;
+    description: string;
+    constructor(name: string, defaultValue?: boolean);
+    getCurrentValueText(): string;
+    trySetValue(text: string): boolean;
+}
 declare class PropertyBag extends Map<string, any> {
     getOrCreate<T>(key: string, factory: () => T): T;
 }
