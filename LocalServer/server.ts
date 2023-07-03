@@ -24,11 +24,11 @@ let server = http.createServer(function (request, response) {
     }
 
     let filePath: string;
-    if (urlWithoutQueryString.endsWith(".js")) {
+    if (urlWithoutQueryString.endsWith(".js") || urlWithoutQueryString.endsWith(".js.map")) {
         filePath = '../EmoteWallExtensions/js_generated' + urlWithoutQueryString;
     }
     else if (urlWithoutQueryString.endsWith(".ts")) {
-        filePath = '../EmoteWallExtensions/ts_source' + urlWithoutQueryString;
+        filePath = '../EmoteWallExtensions' + urlWithoutQueryString;
     }
     else {
         console.log("Extension not recognized");

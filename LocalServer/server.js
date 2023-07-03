@@ -22,11 +22,13 @@ let server = http.createServer(function (request, response) {
         return;
     }
     let filePath;
-    if (urlWithoutQueryString.endsWith(".js")) {
+    console.log("WOWOWO: " + urlWithoutQueryString);
+    if (urlWithoutQueryString.endsWith(".js") || urlWithoutQueryString.endsWith(".js.map")) {
         filePath = '../EmoteWallExtensions/js_generated' + urlWithoutQueryString;
     }
     else if (urlWithoutQueryString.endsWith(".ts")) {
-        filePath = '../EmoteWallExtensions/ts_source' + urlWithoutQueryString;
+        filePath = '../EmoteWallExtensions' + urlWithoutQueryString;
+        console.log(`TS! urlWithoutQueryString is '${urlWithoutQueryString}' and filePath is '${filePath}'`);
     }
     else {
         console.log("Extension not recognized");
