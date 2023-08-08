@@ -208,14 +208,26 @@ declare class EmoteOverlayPluginCollection {
     static AnyPluginDemandsFullControl(message: TwitchMessage): boolean;
     static ModifyEmoteDataCollectionForCreationWithDefaultSettings(message: TwitchMessage, emoteDataListBuilder: EmoteDataList): void;
     static ModifyUnInitializedOverlayEmoteCollection(message: TwitchMessage, overlayEmotes: ReadonlyArray<OverlayEmote>): void;
+    private static LogPluginError;
 }
 declare class ActiveEmotesManager {
     private static activeEmotes;
     private static debugNumFrameTimingsToAverage;
     private static debugNextFrameSlot;
     private static debugFrameTimings;
+    static incrementTotalErrorCount(): void;
+    private static totalErrorCount;
+    static debugTotalErrorEvent: LiteEvent<number>;
+    static debugPluginFailuresCounts: Map<IEmoteOverlayPlugin, number>;
+    static debugPluginFailuresExamples: Map<IEmoteOverlayPlugin, string[]>;
+    static debugPluginFailuresEvents: Map<IEmoteOverlayPlugin, LiteEvent<number>>;
+    static debugComponentFailuresCounts: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, number>;
+    static debugComponentFailuresExamples: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, string[]>;
+    static debugComponentFailuresEvents: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, LiteEvent<number>>;
     private static debugRefCountedComponentsCounts;
     private static debugRefCountedComponentsEvents;
+    static ensureComponentFailuresTracked(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): void;
+    static registerFailureCountedComponent(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): ILiteEvent<number>;
     static registerRefCountedComponent(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): ILiteEvent<number>;
     static adjustToTime(time: number): void;
     static killAll(): void;
@@ -516,12 +528,33 @@ declare function percentBetween(start: number, between: number, end: number): nu
 
 
 // From file: BuiltTypeDefs/Physics/Geometry.d.ts
+declare class TrackSectionShape {
+    readonly LeftWall: Wall;
+    readonly RightWall: Wall;
+    constructor(LeftWall: Wall, RightWall: Wall);
+    toPerimeter(extraPixels?: number): Coordinates[];
+    splitLengthwise(pieces: number): TrackSectionShape[];
+    mergeWith(other: TrackSectionShape): TrackSectionShape;
+}
+declare class Wall {
+    readonly Points: Coordinates[];
+    get Start(): Coordinates;
+    get End(): Coordinates;
+    GetExtended(extraPixels: number): Wall;
+    constructor(Points: Coordinates[]);
+}
+declare class LineSegment {
+    readonly Start: Coordinates;
+    readonly End: Coordinates;
+    constructor(Start: Coordinates, End: Coordinates);
+}
 declare class Coordinates {
     readonly X: number;
     readonly Y: number;
     constructor(X: number, Y: number);
     vectorFrom(other: Coordinates): Vector;
     translate(vector: Vector): Coordinates;
+    equals(other: Coordinates): boolean;
     static dist(p0: Coordinates, p1: Coordinates): number;
     toString(): string;
 }
@@ -553,6 +586,7 @@ declare class Rectangle {
 
 // From file: BuiltTypeDefs/Utilities/SignalRConnection.d.ts
 declare class HubConnection {
+    private readonly hubName;
     private readonly hubConnection;
     private readonly onConnected;
     get Connected(): import("./Utilities").ILiteEvent<void>;
