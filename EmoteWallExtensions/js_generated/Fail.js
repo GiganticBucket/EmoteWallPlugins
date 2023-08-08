@@ -67,13 +67,13 @@ registerPlugin({
         }
     },
     ModifyUninitializedOverlayEmotes(message, overlayEmotes) {
-        if (buggyModifyUninitializedOverlayEmotesOption.currentValue) {
-            throw new Error("Test error from a buggy plugin's ModifyUninitializedOverlayEmotes method");
-        }
         overlayEmotes.forEach(emote => {
             emote.configurers.add(buggyConfigurer);
             emote.behaviors.add(buggyBehavior);
         });
+        if (buggyModifyUninitializedOverlayEmotesOption.currentValue) {
+            throw new Error("Test error from a buggy plugin's ModifyUninitializedOverlayEmotes method");
+        }
     },
 });
 //# sourceMappingURL=Fail.js.map

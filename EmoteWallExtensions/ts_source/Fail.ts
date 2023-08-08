@@ -74,14 +74,13 @@ registerPlugin({
         }
     },
     ModifyUninitializedOverlayEmotes(message: TwitchMessage, overlayEmotes: readonly OverlayEmote[]) {
-        if (buggyModifyUninitializedOverlayEmotesOption.currentValue) {
-            throw new Error("Test error from a buggy plugin's ModifyUninitializedOverlayEmotes method");
-        }
-
         overlayEmotes.forEach(emote => {
             emote.configurers.add(buggyConfigurer);
             emote.behaviors.add(buggyBehavior);
         });
-    },
-    
+
+        if (buggyModifyUninitializedOverlayEmotesOption.currentValue) {
+            throw new Error("Test error from a buggy plugin's ModifyUninitializedOverlayEmotes method");
+        }
+    },    
 });
