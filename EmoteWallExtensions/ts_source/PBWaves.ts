@@ -88,6 +88,8 @@ let timeBetweenEndpointJumpsSecondsOption: IEditableOption = {
     getCurrentValueText: () => timeBetweenEndpointJumpsSeconds.toString()
 };
 
+let extendBodyWhenInAir = new BooleanOption("extendBodyWhenInAir", false);
+
 registerPlugin({
     name: "PB Wave",
     // customizableBehaviors: [waddleOpacityBehavior, waddleVelocityBehavior],
@@ -96,7 +98,8 @@ registerPlugin({
         singleJumpDurationSecondsOption,
         timeBetweenEndpointJumpsSecondsOption,
         individualDudeJumpCountOption,
-        maxJumpHeightMultiplierOption
+        maxJumpHeightMultiplierOption,
+        extendBodyWhenInAir
     ],
     testButtons: [
         {
@@ -105,19 +108,31 @@ registerPlugin({
         },
         {
             buttonText: "Bouncy",
-            callback: () => handlePBWave(22, 4, 0.7, 1.4, 1)
+            callback: () => handlePBWave(22, 4, 0.7, 1.4, 1, false)
         },
         {
             buttonText: "Big Dudes",
-            callback: () => handlePBWave(6, 1, 2, 2, 1)
+            callback: () => handlePBWave(6, 1, 2, 2, 1, false)
         },
         {
             buttonText: "Jumpers",
-            callback: () => handlePBWave(12, 1, 1.5, 1.8, 4)
+            callback: () => handlePBWave(12, 1, 1.5, 1.8, 4, false)
+        },
+        {
+            buttonText: "Tall Jumpers",
+            callback: () => handlePBWave(12, 1, 1.5, 1.8, 4, true)
+        },
+        {
+            buttonText: "Rolling Wave",
+            callback: () => handlePBWave(30, 5, 0.6, 1.4, 4, true)
         },
         {
             buttonText: "Crowd",
             callback: () => handlePBWaveCrowd()
+        },
+        {
+            buttonText: "Crowd with Wave",
+            callback: () => handlePBWaveCrowdWithWave()
         }
     ]
 });
@@ -127,7 +142,8 @@ async function handlePBWave(
     actualIndividualDudeJumpCount: number = individualDudeJumpCount,
     actualSingleJumpDurationSeconds: number = singleJumpDurationSeconds,
     actualTimeBetweenEndpointJumpsSeconds: number = timeBetweenEndpointJumpsSeconds,
-    actualMaxJumpHeightMultiplier: number = maxJumpHeightMultiplier) {
+    actualMaxJumpHeightMultiplier: number = maxJumpHeightMultiplier,
+    actualExtendBodyWhenInAir: boolean = extendBodyWhenInAir.currentValue) {
 
     let horizontalSpaceOccupiedByWave = window.innerWidth / actualNumDudes;
     let dimensionsForIndividualPBs = horizontalSpaceOccupiedByWave;
@@ -136,7 +152,11 @@ async function handlePBWave(
     let emoteDuration = actualSingleJumpDurationSeconds * actualIndividualDudeJumpCount;
 
     for (let i = 0; i < actualNumDudes; i++) {
-        let pbEmoteData = new EmoteData("macrop3PB", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8c56f65d08314e6cb9f40791f5db3fe7/default/light/3.0", EmoteOriginKind.Twitch);
+        const longBoi = actualMaxJumpHeightMultiplier > 1 && actualExtendBodyWhenInAir;
+        const pbEmoteData = longBoi
+            ? new EmoteData("macrop3PB", "https://gb-bot-site-frontend.vercel.app/macroPBLong.png", EmoteOriginKind.Other)
+            : new EmoteData("macrop3PB", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8c56f65d08314e6cb9f40791f5db3fe7/default/light/3.0", EmoteOriginKind.Twitch);
+
         let overlayEmote = new OverlayEmote(
             pbEmoteData,
             new OverlayEmoteState(emoteDuration),
@@ -149,6 +169,16 @@ async function handlePBWave(
         await ActiveEmotesManager.startOverlayEmotes([overlayEmote]);
         await sleep(secondsBetweenPBs * 1000);
     }
+
+    function sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}
+
+async function handlePBWaveCrowdWithWave() {
+    handlePBWaveCrowd();
+    await sleep(1000);
+    handlePBWave(12, 1, 1.5, 2.2, 2.6, true);
 
     function sleep(ms: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -200,8 +230,13 @@ class PBConfigurer implements IOverlayEmoteConfigurer {
         startingOverlayEmote.state.properties.set("angle", Math.PI / 2);
         startingOverlayEmote.state.image.style.top = `${window.innerHeight}px`;
         startingOverlayEmote.state.image.style.left = `${this._leftPosition}px`;
-        startingOverlayEmote.state.image.height = this._emoteDimension;
-        startingOverlayEmote.state.image.width = this._emoteDimension;
+
+        const aspectRatio = startingOverlayEmote.state.image.width / startingOverlayEmote.state.image.height;
+        const width = this._emoteDimension;
+        const height = width / aspectRatio;
+
+        startingOverlayEmote.state.image.width = width;
+        startingOverlayEmote.state.image.height = height;
 
         startingOverlayEmote.state.image.style.zIndex = Math.floor(1 + window.innerWidth - this._emoteDimension).toString();
     }
