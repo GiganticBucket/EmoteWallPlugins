@@ -1,3 +1,76 @@
+const pbWavesTestButtons = [
+    {
+        buttonText: "[Use Current Options]",
+        callback: () => handlePBWave()
+    },
+    {
+        buttonText: "Bouncy",
+        callback: () => handlePBWave(22, 4, 0.7, 1.4, 1, false)
+    },
+    {
+        buttonText: "Big Dudes",
+        callback: () => handlePBWave(6, 1, 2, 2, 1, false)
+    },
+    {
+        buttonText: "Jumpers",
+        callback: () => handlePBWave(12, 1, 1.5, 1.8, 4, false)
+    },
+    {
+        buttonText: "Tall Jumpers",
+        callback: () => handlePBWave(12, 1, 1.5, 1.8, 4, true)
+    },
+    {
+        buttonText: "Rolling Wave",
+        callback: () => handlePBWave(30, 5, 0.6, 1.4, 4, true)
+    },
+    {
+        buttonText: "Rolling Wave 2",
+        callback: () => handleOverlappingWaves()
+    },
+    {
+        buttonText: "Crowd",
+        callback: () => handlePBWaveCrowd()
+    },
+    {
+        buttonText: "Crowd with Wave",
+        callback: () => handlePBWaveCrowdWithWave()
+    },
+    {
+        buttonText: "(useHelicopters true)",
+        callback: () => useHelicopters.trySetValue("true")
+    },
+    {
+        buttonText: "(useHelicopters false)",
+        callback: () => useHelicopters.trySetValue("false")
+    }
+];
+
+const pbWavesExtensionName = "PB Wave";
+let pbWavesConnection: HubConnection;
+
+addOrUseExistingScriptReference("https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js", () => {
+    pbWavesConnection = new HubConnection("chatHub");
+    pbWavesConnection.Connected.add(() => {
+        pbWavesConnection.invoke("NotifyEmoteExtensionButtons", pbWavesExtensionName, pbWavesTestButtons.map(b => b.buttonText));
+    });
+
+    pbWavesConnection.addHandlers([
+        new HubConnectionHandler("EmoteExtensionButtonClicked", pbWavesHandleRemoteButtonClicked)
+    ]);
+    pbWavesConnection.start();
+});
+
+function pbWavesHandleRemoteButtonClicked(targetExtensionName: string, buttonText: string) {
+    console.log("pbWavesHandleRemoteButtonClicked: " + targetExtensionName + " -- " + buttonText);
+
+    if (targetExtensionName != pbWavesExtensionName) {
+        return;
+    }
+
+    let matchingButton = pbWavesTestButtons.find(b => b.buttonText == buttonText);
+    matchingButton?.callback();
+}
+
 const numDudesOption = new BoundedIntegerOption("numDudes", 16, 1, 100);
 const individualDudeJumpCountOption = new BoundedIntegerOption("individualDudeJumpCount", 1, 1, 10);
 
@@ -57,8 +130,10 @@ let timeBetweenEndpointJumpsSecondsOption: IEditableOption = {
 
 const extendBodyWhenInAirOption = new BooleanOption("extendBodyWhenInAir", false);
 
+const useHelicopters = new BooleanOption("useHelicopters", false);
+
 registerPlugin({
-    name: "PB Wave",
+    name: pbWavesExtensionName,
     // customizableBehaviors: [waddleOpacityBehavior, waddleVelocityBehavior],
     options: [
         numDudesOption,
@@ -66,43 +141,25 @@ registerPlugin({
         timeBetweenEndpointJumpsSecondsOption,
         individualDudeJumpCountOption,
         maxJumpHeightMultiplierOption,
-        extendBodyWhenInAirOption
+        extendBodyWhenInAirOption,
+        useHelicopters
     ],
-    testButtons: [
-        {
-            buttonText: "[Use Current Options]",
-            callback: () => handlePBWave()
-        },
-        {
-            buttonText: "Bouncy",
-            callback: () => handlePBWave(22, 4, 0.7, 1.4, 1, false)
-        },
-        {
-            buttonText: "Big Dudes",
-            callback: () => handlePBWave(6, 1, 2, 2, 1, false)
-        },
-        {
-            buttonText: "Jumpers",
-            callback: () => handlePBWave(12, 1, 1.5, 1.8, 4, false)
-        },
-        {
-            buttonText: "Tall Jumpers",
-            callback: () => handlePBWave(12, 1, 1.5, 1.8, 4, true)
-        },
-        {
-            buttonText: "Rolling Wave",
-            callback: () => handlePBWave(30, 5, 0.6, 1.4, 4, true)
-        },
-        {
-            buttonText: "Crowd",
-            callback: () => handlePBWaveCrowd()
-        },
-        {
-            buttonText: "Crowd with Wave",
-            callback: () => handlePBWaveCrowdWithWave()
-        }
-    ]
+    testButtons: pbWavesTestButtons,
 });
+
+async function handleOverlappingWaves() {
+    const numWaves = 4;
+    const secondsBetweenWaves = 0.2;
+
+    for (let i = 0; i < numWaves; i++) {
+        handlePBWave(30, 3, 0.6, 1.4, 4, true);
+        await sleep(secondsBetweenWaves * 1000);
+    }
+
+    function sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}
 
 async function handlePBWave(
     actualNumDudes: number = numDudesOption.currentValue,
@@ -120,9 +177,11 @@ async function handlePBWave(
 
     for (let i = 0; i < actualNumDudes; i++) {
         const longBoi = actualMaxJumpHeightMultiplier > 1 && actualExtendBodyWhenInAir;
-        const pbEmoteData = longBoi
-            ? new EmoteData("macrop3PB", "https://gb-bot-site-frontend.vercel.app/macroPBLong.png", EmoteOriginKind.Other)
-            : new EmoteData("macrop3PB", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8c56f65d08314e6cb9f40791f5db3fe7/default/light/3.0", EmoteOriginKind.Twitch);
+        const pbEmoteData = useHelicopters.currentValue
+            ? new EmoteData("macrop3PB", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_519580cd3a1243b8b3aff6460e2e2de5/default/light/3.0", EmoteOriginKind.Twitch)
+            : longBoi
+                ? new EmoteData("macrop3PB", "https://gb-bot-site-frontend.vercel.app/macroPBLong.png", EmoteOriginKind.Other)
+                : new EmoteData("macrop3PB", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8c56f65d08314e6cb9f40791f5db3fe7/default/light/3.0", EmoteOriginKind.Twitch);
 
         let overlayEmote = new OverlayEmote(
             pbEmoteData,
