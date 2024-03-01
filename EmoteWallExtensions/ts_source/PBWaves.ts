@@ -1,38 +1,5 @@
-let defaultNumDudes = 16;
-let numDudes = defaultNumDudes;
-let numDudesOption: IEditableOption = {
-    name: "numDudes",
-    defaultValueText: defaultNumDudes.toString(),
-    trySetValue: (text: string): boolean => {
-        let num = Number(text);
-        if (Number.isSafeInteger(num) && num >= 1 && num <= 100) {
-            numDudes = num;
-            return true;
-        }
-        else {
-            return false;
-        }
-    },
-    getCurrentValueText: () => numDudes.toString()
-};
-
-let defaultIndividualDudeJumpCount = 1;
-let individualDudeJumpCount = defaultIndividualDudeJumpCount;
-let individualDudeJumpCountOption: IEditableOption = {
-    name: "individualDudeJumpCount",
-    defaultValueText: defaultIndividualDudeJumpCount.toString(),
-    trySetValue: (text: string): boolean => {
-        let num = Number(text);
-        if (Number.isSafeInteger(num) && num >= 1 && num <= 10) {
-            individualDudeJumpCount = num;
-            return true;
-        }
-        else {
-            return false;
-        }
-    },
-    getCurrentValueText: () => individualDudeJumpCount.toString()
-};
+const numDudesOption = new BoundedIntegerOption("numDudes", 16, 1, 100);
+const individualDudeJumpCountOption = new BoundedIntegerOption("individualDudeJumpCount", 1, 1, 10);
 
 let defaultMaxJumpHeightMultiplier = 1;
 let maxJumpHeightMultiplier = defaultMaxJumpHeightMultiplier;
@@ -88,7 +55,7 @@ let timeBetweenEndpointJumpsSecondsOption: IEditableOption = {
     getCurrentValueText: () => timeBetweenEndpointJumpsSeconds.toString()
 };
 
-let extendBodyWhenInAir = new BooleanOption("extendBodyWhenInAir", false);
+const extendBodyWhenInAirOption = new BooleanOption("extendBodyWhenInAir", false);
 
 registerPlugin({
     name: "PB Wave",
@@ -99,7 +66,7 @@ registerPlugin({
         timeBetweenEndpointJumpsSecondsOption,
         individualDudeJumpCountOption,
         maxJumpHeightMultiplierOption,
-        extendBodyWhenInAir
+        extendBodyWhenInAirOption
     ],
     testButtons: [
         {
@@ -138,12 +105,12 @@ registerPlugin({
 });
 
 async function handlePBWave(
-    actualNumDudes: number = numDudes,
-    actualIndividualDudeJumpCount: number = individualDudeJumpCount,
+    actualNumDudes: number = numDudesOption.currentValue,
+    actualIndividualDudeJumpCount: number = individualDudeJumpCountOption.currentValue,
     actualSingleJumpDurationSeconds: number = singleJumpDurationSeconds,
     actualTimeBetweenEndpointJumpsSeconds: number = timeBetweenEndpointJumpsSeconds,
     actualMaxJumpHeightMultiplier: number = maxJumpHeightMultiplier,
-    actualExtendBodyWhenInAir: boolean = extendBodyWhenInAir.currentValue) {
+    actualExtendBodyWhenInAir: boolean = extendBodyWhenInAirOption.currentValue) {
 
     let horizontalSpaceOccupiedByWave = window.innerWidth / actualNumDudes;
     let dimensionsForIndividualPBs = horizontalSpaceOccupiedByWave;
