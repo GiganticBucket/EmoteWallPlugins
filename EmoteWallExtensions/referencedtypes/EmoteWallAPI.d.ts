@@ -18,8 +18,6 @@ declare class DurationConfigurer implements IOverlayEmoteConfigurer {
 declare class BoundedStartingSizeConfigurer implements IOverlayEmoteConfigurer {
     static readonly defaultName = "BoundedStartingSize";
     readonly name: any;
-    private defaultSize;
-    private size;
     constructor(size: number, name?: string);
     configure(startingOverlayEmote: OverlayEmote): void;
     trySetSize(text: string): boolean;
@@ -39,22 +37,16 @@ declare class RandomStartPositionConfigurer implements IOverlayEmoteConfigurer {
     configure(startingOverlayEmote: OverlayEmote): void;
 }
 declare class InitialPositionConfigurer implements IOverlayEmoteConfigurer {
-    private _left;
-    private _top;
     name: string;
     constructor(_left: number, _top: number);
     configure(startingOverlayEmote: OverlayEmote): void;
 }
 declare class InitialVelocityConfigurer implements IOverlayEmoteConfigurer {
-    private _angle;
-    private _speedPixelsPerSecond;
     constructor(_angle: number, _speedPixelsPerSecond: number);
     name: string;
     configure(startingOverlayEmote: OverlayEmote): void;
 }
 declare class GravityBehavior implements IOverlayEmoteBehavior {
-    private _gravityConstant;
-    private _reboundMultiplier;
     name: string;
     constructor(_gravityConstant: number, _reboundMultiplier: number);
     preApply(overlayEmoteState: OverlayEmoteState): void;
@@ -63,12 +55,9 @@ declare class GravityBehavior implements IOverlayEmoteBehavior {
 declare class RotationSpeedBehavior implements IOverlayEmoteBehavior {
     static readonly defaultName = "RotationSpeed";
     readonly name: any;
-    private defaultAnimationGraph;
-    private animationGraph;
     constructor(animationGraph: AnimationGraph, name?: string);
     protected tryUpdateRotationSpec(animationGraph: AnimationGraph): boolean;
     apply(overlayEmoteState: OverlayEmoteState): void;
-    private tryParseAndUpdateRotationSpec;
     rotationSpeedOption: IEditableOptionWithVisualizer<AnimationGraph>;
     options: IEditableOption[];
     protected _onValueChanged: any;
@@ -77,12 +66,9 @@ declare class RotationSpeedBehavior implements IOverlayEmoteBehavior {
 declare class ScaleMultiplierBehavior implements IOverlayEmoteBehavior {
     static readonly defaultName = "ScaleMultiplier";
     readonly name: any;
-    private defaultAnimationGraph;
-    private animationGraph;
     constructor(animationGraph: AnimationGraph, name?: string);
     protected tryUpdateScaleSpec(animationGraph: AnimationGraph): boolean;
     apply(overlayEmoteState: OverlayEmoteState): void;
-    private tryParseAndUpdateScaleSpec;
     scaleOption: IEditableOptionWithVisualizer<AnimationGraph>;
     options: IEditableOption[];
     protected _onValueChanged: any;
@@ -91,12 +77,9 @@ declare class ScaleMultiplierBehavior implements IOverlayEmoteBehavior {
 declare class RotationBehavior implements IOverlayEmoteBehavior {
     static readonly defaultName = "RotationDegrees";
     readonly name: any;
-    private defaultAnimationGraph;
-    private animationGraph;
     constructor(animationGraph: AnimationGraph, name?: string);
     protected tryUpdateRotationSpec(animationGraph: AnimationGraph): boolean;
     apply(overlayEmoteState: OverlayEmoteState): void;
-    private tryParseAndUpdateRotationSpec;
     rotationOption: IEditableOptionWithVisualizer<AnimationGraph>;
     options: IEditableOption[];
     protected _onValueChanged: any;
@@ -105,42 +88,27 @@ declare class RotationBehavior implements IOverlayEmoteBehavior {
 declare class VectorVelocityBehavior implements IOverlayEmoteBehavior {
     static readonly defaultName = "VelocityGraph";
     readonly name: any;
-    private defaultAnimationGraph;
-    private animationGraph;
     constructor(animationGraph: AnimationGraph, name?: string);
-    private tryUpdateVelocitySpec;
     apply(overlayEmoteState: OverlayEmoteState): void;
-    private tryParseAndUpdateVelocitySpec;
     velocitySpecOption: IEditableOptionWithVisualizer<AnimationGraph>;
     options: IEditableOption[];
     protected _onValueChanged: any;
     get ValueChanged(): ILiteEvent<AnimationGraph>;
 }
 declare class ConstantVelocityBehavior implements IOverlayEmoteBehavior {
-    private velocityPixelsPerSecond;
     static readonly defaultName = "VelocityConstant";
     readonly name: any;
-    private readonly defaultSpeedPixelsPerSecond;
-    private implementingVectorVelocityBehavior;
-    constructor(velocityPixelsPerSecond: number, name?: string);
+    constructor(velocityPixelsPerSecond: any, name?: string);
     constVelocityOption: IEditableOption;
     options: IEditableOption[];
-    private tryUpdateConstVelocity;
     apply(overlayEmoteState: OverlayEmoteState): void;
 }
 declare class RandomConstantVelocityBehavior implements IOverlayEmoteBehavior {
     name: string;
-    private defaultMinSpeedPixelsPerSecond;
-    private defaultMaxSpeedPixelsPerSecond;
-    private minVelocityPixelsPerSecond;
-    private maxVelocityPixelsPerSecond;
     constructor(minVelocityPixelsPerSecond: number, maxVelocityPixelsPerSecond: number);
     readonly minVelocityOption: IEditableOption;
     readonly maxVelocityOption: IEditableOption;
     readonly options: IEditableOption[];
-    private tryUpdateMinVelocity;
-    private tryUpdateMaxVelocity;
-    private tryUpdateVelocityPart;
     apply(overlayEmoteState: OverlayEmoteState): void;
 }
 declare class OpacityBehavior implements IOverlayEmoteBehavior {
@@ -155,16 +123,9 @@ declare class OpacityBehavior implements IOverlayEmoteBehavior {
     options: IEditableOption[];
     protected _onValueChanged: any;
     get ValueChanged(): ILiteEvent<AnimationGraph>;
-    private tryParseAndUpdateOpacitySpec;
 }
 declare class BounceOffWallsBehavior implements IOverlayEmoteBehavior {
     name: string;
-    private static topIndex;
-    private static rightIndex;
-    private static bottomIndex;
-    private static leftIndex;
-    private _defaultSidesToBounce;
-    private _sidesToBounce;
     constructor(sidesToBounceTRBL?: boolean[]);
     updateSidesToBounce(sidesToBounceTRBL: boolean[]): void;
     preApply(overlayEmoteState: OverlayEmoteState): boolean;
@@ -179,8 +140,6 @@ declare class StartOnSideConfigurer implements IOverlayEmoteConfigurer {
     readonly name: any;
     static sideNames: string[];
     static readonly sideToStartWhenNoneSpecified = "none";
-    private readonly sideToStartDefault;
-    private sideToStart;
     constructor(sideToStart?: string, name?: string);
     configure(startingOverlayEmote: OverlayEmote): void;
     applySideToStart(startingOverlayEmote: OverlayEmote, sideName: string): void;
@@ -208,15 +167,9 @@ declare class EmoteOverlayPluginCollection {
     static AnyPluginDemandsFullControl(message: TwitchMessage): boolean;
     static ModifyEmoteDataCollectionForCreationWithDefaultSettings(message: TwitchMessage, emoteDataListBuilder: EmoteDataList): void;
     static ModifyUnInitializedOverlayEmoteCollection(message: TwitchMessage, overlayEmotes: ReadonlyArray<OverlayEmote>): void;
-    private static LogPluginError;
 }
 declare class ActiveEmotesManager {
-    private static activeEmotes;
-    private static debugNumFrameTimingsToAverage;
-    private static debugNextFrameSlot;
-    private static debugFrameTimings;
     static incrementTotalErrorCount(): void;
-    private static totalErrorCount;
     static debugTotalErrorEvent: LiteEvent<number>;
     static debugPluginFailuresCounts: Map<IEmoteOverlayPlugin, number>;
     static debugPluginFailuresExamples: Map<IEmoteOverlayPlugin, string[]>;
@@ -224,8 +177,6 @@ declare class ActiveEmotesManager {
     static debugComponentFailuresCounts: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, number>;
     static debugComponentFailuresExamples: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, string[]>;
     static debugComponentFailuresEvents: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, LiteEvent<number>>;
-    private static debugRefCountedComponentsCounts;
-    private static debugRefCountedComponentsEvents;
     static ensureComponentFailuresTracked(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): void;
     static registerFailureCountedComponent(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): ILiteEvent<number>;
     static registerRefCountedComponent(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): ILiteEvent<number>;
@@ -348,7 +299,6 @@ declare class OverlayEmote {
     state: OverlayEmoteState;
     configurers: EmoteConfigurerList;
     behaviors: EmoteBehaviorList;
-    private startTime;
     get name(): string;
     setStartTime(startTime: number): void;
     constructor(emoteData: EmoteData, state: OverlayEmoteState, configurers?: EmoteConfigurerList, behaviors?: EmoteBehaviorList);
@@ -450,7 +400,6 @@ declare class UIElements {
 declare class NamedObjectList<T extends {
     name?: string;
 }> {
-    private _entries;
     constructor(...initialEntries: T[]);
     clear(): void;
     add(entry: T): void;
@@ -481,14 +430,10 @@ declare class EmoteData {
     constructor(name: string, url: string, emoteKind?: EmoteOriginKind);
 }
 declare class TwitchConnection {
-    channel: string;
-    private messageHandler;
-    private static seenChannelIds;
+    readonly channel: string;
     static globalBTTVEmotes: Map<string, [string, EmoteOriginKind]>;
     channelBTTVEmotes: Map<string, [string, EmoteOriginKind]>;
     constructor(channel: string, messageHandler: (message: TwitchMessage) => void);
-    private static initGlobalBTTVEmotes;
-    private connectToTwitch;
 }
 declare class TwitchMessage {
     readonly channel: string;
@@ -512,7 +457,6 @@ declare class Keyframe {
  */
 declare class AnimationGraph {
     readonly keyframes: Keyframe[];
-    private constructor();
     static fromKeyframes(keyframes: Keyframe[]): AnimationGraph;
     static fromArrays(arrays: number[][]): AnimationGraph;
     static fromArraysText(text: string): AnimationGraph;
@@ -592,16 +536,9 @@ declare function normalizeAngle(radians: number): number;
 
 // From file: BuiltTypeDefs/Utilities/SignalRConnection.d.ts
 declare class HubConnection {
-    private readonly hubName;
-    prependedArguments: any[];
-    private enabled;
-    private readonly hubConnection;
-    private readonly onConnected;
     get Connected(): import("./Utilities").ILiteEvent<void>;
-    private readonly onDisconnected;
     get Disconnected(): import("./Utilities").ILiteEvent<void>;
     constructor(hubName: string, prependedArguments?: any[], enabled?: boolean);
-    private knownHandlerCounts;
     addHandlers(handlers: HubConnectionHandler[]): void;
     invoke(name: string, ...params: any[]): boolean;
     start(): Promise<void>;
