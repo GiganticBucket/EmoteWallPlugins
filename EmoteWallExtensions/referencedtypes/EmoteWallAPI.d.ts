@@ -553,6 +553,7 @@ declare class Coordinates {
     readonly Y: number;
     constructor(X: number, Y: number);
     vectorFrom(other: Coordinates): Vector;
+    vectorTo(other: Coordinates): Vector;
     translate(vector: Vector): Coordinates;
     equals(other: Coordinates): boolean;
     static dist(p0: Coordinates, p1: Coordinates): number;
@@ -560,15 +561,17 @@ declare class Coordinates {
 }
 declare class Vector {
     readonly magnitude: number;
-    readonly direction: number;
     readonly xComponent: number;
     readonly yComponent: number;
+    readonly direction: number;
     constructor(magnitude: number, direction: number);
     static fromCoordinates(start: Coordinates, end: Coordinates): Vector;
     static fromAngle(radians: number): Vector;
     withMagnitude(magnitude: number): Vector;
     withDirection(direction: number): Vector;
     multiply(c: number): Vector;
+    reverse(): Vector;
+    dotProduct(other: Vector): number;
     normals(): Vector[];
 }
 declare class Rectangle {
@@ -578,23 +581,29 @@ declare class Rectangle {
     readonly height: number;
     readonly X2: any;
     readonly Y2: any;
+    readonly XMid: any;
+    readonly YMid: any;
     constructor(X: number, Y: number, width: number, height: number);
     contains(coordinate: Coordinates): boolean;
     static createSurrounding(coordinate: Coordinates, width: number, height: number): Rectangle;
 }
+declare function normalizeAngle(radians: number): number;
 
 
 // From file: BuiltTypeDefs/Utilities/SignalRConnection.d.ts
 declare class HubConnection {
     private readonly hubName;
+    prependedArguments: any[];
+    private enabled;
     private readonly hubConnection;
     private readonly onConnected;
     get Connected(): import("./Utilities").ILiteEvent<void>;
     private readonly onDisconnected;
     get Disconnected(): import("./Utilities").ILiteEvent<void>;
-    constructor(hubName: string);
+    constructor(hubName: string, prependedArguments?: any[], enabled?: boolean);
+    private knownHandlerCounts;
     addHandlers(handlers: HubConnectionHandler[]): void;
-    invoke(name: string, ...params: any[]): void;
+    invoke(name: string, ...params: any[]): boolean;
     start(): Promise<void>;
 }
 declare class HubConnectionHandler {
@@ -602,3 +611,19 @@ declare class HubConnectionHandler {
     callback: any;
     constructor(name: string, callback: any);
 }
+
+
+// From file: BuiltTypeDefs/Utilities/StreamerBotWebsocket.d.ts
+declare class StreamerBotWebsocket {
+    constructor(url: string, actionHandlers?: StreamerBotActionHandler[], customEventHandlers?: StreamerBotCustomEventHandler[]);
+    registerCustomEventHandlers(...customEventHandlers: StreamerBotCustomEventHandler[]): void;
+    registerActionHandlers(...actionHandlers: StreamerBotActionHandler[]): void;
+}
+type StreamerBotActionHandler = {
+    name: string;
+    handler: () => void;
+};
+type StreamerBotCustomEventHandler = {
+    name: string;
+    handler: (data: any) => void;
+};
