@@ -9,8 +9,7 @@ streamerBot.registerCustomEventHandlers({ name: "DoWaddles", handler: data => st
 // Alternatively, all handlers can be specified during construction:
 //      const streamerBot = new StreamerBotWebsocket("ws://localhost:9094/",
 //          [{ name: "DoMuncherYosh", handler: () => startMuncherYosh() }],
-//          [{ name: "DoWaddles", handler: data => startWaddle(data.count) }]
-//);
+//          [{ name: "DoWaddles", handler: data => startWaddle(data.count) }]);
 async function startWaddle(count) {
     const waddleEmoteData = new EmoteData("StreamerBotDemoWaddle", "https://cdn.betterttv.net/emote/608b8d5639b5010444d08ee0/3x", EmoteOriginKind.BTTVChannel);
     await startEmotes(waddleEmoteData, count);
