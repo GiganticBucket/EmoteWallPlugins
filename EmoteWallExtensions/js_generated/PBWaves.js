@@ -1,42 +1,3 @@
-const pbWavesTestButtons = [
-    {
-        buttonText: "[Test Current Options]",
-        callback: () => handlePBWave()
-    },
-    {
-        buttonText: "Bouncy",
-        callback: () => handlePBWave(22, 4, 0.7, 1.4, 1, false)
-    },
-    {
-        buttonText: "Big Dudes",
-        callback: () => handlePBWave(6, 1, 2, 2, 1, false)
-    },
-    {
-        buttonText: "Jumpers",
-        callback: () => handlePBWave(12, 1, 1.5, 1.8, 4, false)
-    },
-    {
-        buttonText: "Tall Jumpers",
-        callback: () => handlePBWave(12, 1, 1.5, 1.8, 4, true)
-    },
-    {
-        buttonText: "Rolling Wave",
-        callback: () => handlePBWave(30, 5, 0.6, 1.4, 4, true)
-    },
-    {
-        buttonText: "Rolling Wave 2",
-        callback: () => handleOverlappingWaves()
-    },
-    {
-        buttonText: "Crowd",
-        callback: () => handlePBWaveCrowd()
-    },
-    {
-        buttonText: "Crowd with Wave",
-        callback: () => handlePBWaveCrowdWithWave()
-    },
-];
-const pbWavesExtensionName = "PB Wave";
 const numDudesOption = new BoundedIntegerOption("numDudes", 16, 1, 100);
 const individualDudeJumpCountOption = new BoundedIntegerOption("individualDudeJumpCount", 1, 1, 10);
 const maxJumpHeightMultiplierOption = new BoundedNumericOption("maxJumpHeightMultiplier", 1, 0.5, 50);
@@ -44,7 +5,7 @@ const timeBetweenEndpointJumpsSecondsOption = new BoundedNumericOption("timeBetw
 const extendBodyWhenInAirOption = new BooleanOption("extendBodyWhenInAir", false);
 const singleJumpDurationSecondsOption = new BoundedNumericOption("singleJumpDurationSeconds", 1, 0.1, 3);
 registerPlugin({
-    name: pbWavesExtensionName,
+    name: "PB Waves",
     options: [
         numDudesOption,
         singleJumpDurationSecondsOption,
@@ -53,20 +14,61 @@ registerPlugin({
         maxJumpHeightMultiplierOption,
         extendBodyWhenInAirOption,
     ],
-    testButtons: pbWavesTestButtons,
+    testButtons: [
+        {
+            buttonText: "[Test Current Options]",
+            callback: () => launchPBWave()
+        },
+        {
+            buttonText: "Small Wave x4",
+            callback: () => launchPBWave(22, 4, 0.7, 1.4, 1, false)
+        },
+        {
+            buttonText: "6 Big Dudes",
+            callback: () => launchPBWave(6, 1, 2, 2, 1, false)
+        },
+        {
+            buttonText: "Medium Jumpers",
+            callback: () => launchPBWave(12, 1, 1.5, 1.8, 4, false)
+        },
+        {
+            buttonText: "Medium Jumpers w/Body",
+            callback: () => launchPBWave(12, 1, 1.5, 1.8, 4, true)
+        },
+        {
+            buttonText: "Tall Wave x5",
+            callback: () => launchPBWave(30, 5, 0.6, 1.4, 4, true)
+        },
+        {
+            buttonText: "Tall Wave x4 x3",
+            callback: () => launchOverlappingWaves()
+        },
+        {
+            buttonText: "Crowd",
+            callback: () => launchWaveCrowd()
+        },
+        {
+            buttonText: "Crowd w/ Wave x1",
+            callback: () => launchCrowdWithWave()
+        },
+        {
+            buttonText: "Small Crowd w/ Wave x1",
+            callback: () => launchCrowdWithSmallWave()
+        }
+    ]
 });
-async function handleOverlappingWaves() {
+async function launchOverlappingWaves() {
     const numWaves = 4;
     const secondsBetweenWaves = 0.2;
     for (let i = 0; i < numWaves; i++) {
-        handlePBWave(30, 3, 0.6, 1.4, 4, true);
+        launchPBWave(30, 3, 0.6, 1.4, 4, true);
         await sleep(secondsBetweenWaves * 1000);
     }
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
-async function handlePBWave(numDudes = numDudesOption.currentValue, individualDudeJumpCount = individualDudeJumpCountOption.currentValue, singleJumpDurationSeconds = singleJumpDurationSecondsOption.currentValue, timeBetweenEndpointJumpsSeconds = timeBetweenEndpointJumpsSecondsOption.currentValue, maxJumpHeightMultiplier = maxJumpHeightMultiplierOption.currentValue, extendBodyWhenInAir = extendBodyWhenInAirOption.currentValue) {
+async function launchPBWave(numDudes = numDudesOption.currentValue, individualDudeJumpCount = individualDudeJumpCountOption.currentValue, singleJumpDurationSeconds = singleJumpDurationSecondsOption.currentValue, timeBetweenEndpointJumpsSeconds = timeBetweenEndpointJumpsSecondsOption.currentValue, maxJumpHeightMultiplier = maxJumpHeightMultiplierOption.currentValue, extendBodyWhenInAir = extendBodyWhenInAirOption.currentValue) {
     let horizontalSpaceOccupiedByWave = window.innerWidth / numDudes;
     let dimensionsForIndividualPBs = horizontalSpaceOccupiedByWave;
     let secondsBetweenPBs = timeBetweenEndpointJumpsSeconds / numDudes;
@@ -84,15 +86,23 @@ async function handlePBWave(numDudes = numDudesOption.currentValue, individualDu
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
-async function handlePBWaveCrowdWithWave() {
-    handlePBWaveCrowd();
+async function launchCrowdWithWave() {
+    launchWaveCrowd();
     await sleep(1000);
-    handlePBWave(12, 1, 1.5, 2.2, 2.6, true);
+    launchPBWave(12, 1, 1.5, 2.2, 2.6, true);
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
-async function handlePBWaveCrowd() {
+async function launchCrowdWithSmallWave() {
+    launchWaveCrowd(50, 120);
+    await sleep(1000);
+    launchPBWave(16, 1, 1.5, 2.2, 2.2, true);
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}
+async function launchWaveCrowd(minDimensions = 50, maxDimensions = 200) {
     const numCrowdDudes = 400;
     const timeBetweenFirstAndLastJumpStartSeconds = 3;
     const delayBetweenDudeStartsSeconds = timeBetweenFirstAndLastJumpStartSeconds / numCrowdDudes;
@@ -100,7 +110,7 @@ async function handlePBWaveCrowd() {
         let pbEmoteData = new EmoteData("macrop3PB", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8c56f65d08314e6cb9f40791f5db3fe7/default/light/3.0", EmoteOriginKind.Twitch);
         let thisDudeSingleJumpDurationSeconds = 0.8 + Math.random() * 1.5;
         let thisDudeJumpCount = 1;
-        let thisDudeDimensions = 50 + Math.floor(Math.random() * 150);
+        let thisDudeDimensions = minDimensions + Math.floor(Math.random() * (maxDimensions - minDimensions));
         let thisDudeDuration = thisDudeSingleJumpDurationSeconds * thisDudeJumpCount;
         let thisDudeLeftPosition = Math.floor(Math.random() * window.innerWidth - thisDudeDimensions / 2);
         let overlayEmote = new OverlayEmote(pbEmoteData, new OverlayEmoteState(thisDudeDuration), new EmoteConfigurerList(new PBConfigurer(thisDudeDimensions, thisDudeLeftPosition)), new EmoteBehaviorList(new PBBehavior(thisDudeDimensions, thisDudeSingleJumpDurationSeconds, 1)));
