@@ -274,6 +274,17 @@ declare class BoundedIntegerOption implements IEditableOption {
     getCurrentValueText(): string;
     trySetValue(text: string): boolean;
 }
+declare class BoundedNumericOption implements IEditableOption {
+    readonly name: string;
+    readonly lowerBound: number;
+    readonly upperBound: number;
+    readonly defaultValueText: string;
+    currentValue: number;
+    description: string;
+    constructor(name: string, defaultValue: number, lowerBound: number, upperBound: number);
+    getCurrentValueText(): string;
+    trySetValue(text: string): boolean;
+}
 declare class BooleanOption implements IEditableOption {
     readonly name: string;
     readonly defaultValueText: string;
