@@ -1,3 +1,4 @@
+// Note: Make sure the Streamer.bot Websocket Server is running via Servers/Clients" > "Websocket Server"
 const streamerBot = new StreamerBotWebsocket("ws://localhost:9094/");
 
 // Actions: Respond to a Streamer.bot "Action" based on its name. This does not allow for parameters.
