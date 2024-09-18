@@ -1,16 +1,16 @@
 const streamerBot = new StreamerBotWebsocket("ws://localhost:9094/");
 // 1) Respond to a Streamer.bot "Action" based on its name. This does not allow for parameters.
 streamerBot.registerActionHandlers({ name: "DoMuncherYosh", handler: () => startMuncherYosh() });
-// 2) A Streamer.bot C# "Sub-Action" with custom data. This allows you to pass arbitrary data.
-// Here's the C# Sub-Action 'Execute' code to trigger #2 above with custom data:
-//      CPH.WebsocketBroadcastJson(System.Text.Json.JsonSerializer.Serialize(new { name = "DoWaddles", count = 7 }));
-//	    return true;
-streamerBot.registerCustomEventHandlers({ name: "DoWaddles", handler: data => startWaddle(data.count) });
+// 2A) Respond to a Streamer.bot C# "Sub-Action" with arbitrary custom data.
+streamerBot.registerCustomEventHandlers({ name: "DoWaddles", handler: data => startWaddles(data.count) });
+// 2B) In Streamer.bot, trigger this C# Sub-Action 'Execute' code run the custom event handler above:
+//  CPH.WebsocketBroadcastJson(System.Text.Json.JsonSerializer.Serialize(new { name = "DoWaddles", count = 7 }));
+//  return true;
 // Alternatively, all handlers can be specified during construction:
 //      const streamerBot = new StreamerBotWebsocket("ws://localhost:9094/",
 //          [{ name: "DoMuncherYosh", handler: () => startMuncherYosh() }],
-//          [{ name: "DoWaddles", handler: data => startWaddle(data.count) }]);
-async function startWaddle(count) {
+//          [{ name: "DoWaddles", handler: data => startWaddles(data.count) }]);
+async function startWaddles(count) {
     const waddleEmoteData = new EmoteData("StreamerBotDemoWaddle", "https://cdn.betterttv.net/emote/608b8d5639b5010444d08ee0/3x", EmoteOriginKind.BTTVChannel);
     await startEmotes(waddleEmoteData, count);
 }
