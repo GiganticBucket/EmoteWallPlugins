@@ -563,7 +563,10 @@ declare class HubConnectionHandler {
 
 // From file: BuiltTypeDefs/Utilities/StreamerBotWebsocket.d.ts
 declare class StreamerBotWebsocket {
-    constructor(url: string, actionHandlers?: StreamerBotActionHandler[], customEventHandlers?: StreamerBotCustomEventHandler[]);
+    constructor(url: string, handlers?: {
+        actionHandlers: StreamerBotActionHandler[];
+        customEventHandlers: StreamerBotCustomEventHandler[];
+    });
     registerCustomEventHandlers(...customEventHandlers: StreamerBotCustomEventHandler[]): void;
     registerActionHandlers(...actionHandlers: StreamerBotActionHandler[]): void;
 }
