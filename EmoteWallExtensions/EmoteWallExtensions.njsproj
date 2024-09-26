@@ -34,6 +34,7 @@
     <Folder Include="referencedtypes\" />
     <Folder Include="js_generated\" />
     <Folder Include="ts_source\" />
+    <Folder Include="ts_source\GB\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
