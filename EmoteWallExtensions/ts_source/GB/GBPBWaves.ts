@@ -59,7 +59,11 @@ function GB_PBWaves_Setup() {
         });
 
         gbBotConnectionPBWaves.addHandlers([
-            new HubConnectionHandler("EmoteExtensionButtonClicked", gbBotRemoteButtonClickedPBWaves)
+            new HubConnectionHandler("EmoteExtensionButtonClicked", gbBotRemoteButtonClickedPBWaves),
+            new HubConnectionHandler("RequestEmoteExtensionButtons", () => {
+                gbBotConnectionPBWaves.invoke("NotifyEmoteExtensionButtons", "PB Waves", gbBotTestButtonsPBWaves.map(b => b.buttonText));
+                launchPBWave(6, 1, 2, 2, 1, false);
+            }),
         ]);
 
         gbBotConnectionPBWaves.start();
