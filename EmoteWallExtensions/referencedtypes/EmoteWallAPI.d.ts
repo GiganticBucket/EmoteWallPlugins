@@ -174,9 +174,9 @@ declare class ActiveEmotesManager {
     static debugPluginFailuresCounts: Map<IEmoteOverlayPlugin, number>;
     static debugPluginFailuresExamples: Map<IEmoteOverlayPlugin, string[]>;
     static debugPluginFailuresEvents: Map<IEmoteOverlayPlugin, LiteEvent<number>>;
-    static debugComponentFailuresCounts: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, number>;
-    static debugComponentFailuresExamples: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, string[]>;
-    static debugComponentFailuresEvents: WeakMap<IOverlayEmoteConfigurer | IOverlayEmoteBehavior, LiteEvent<number>>;
+    static debugComponentFailuresCounts: WeakMap<IOverlayEmoteBehavior | IOverlayEmoteConfigurer, number>;
+    static debugComponentFailuresExamples: WeakMap<IOverlayEmoteBehavior | IOverlayEmoteConfigurer, string[]>;
+    static debugComponentFailuresEvents: WeakMap<IOverlayEmoteBehavior | IOverlayEmoteConfigurer, LiteEvent<number>>;
     static ensureComponentFailuresTracked(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): void;
     static registerFailureCountedComponent(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): ILiteEvent<number>;
     static registerRefCountedComponent(component: (IOverlayEmoteConfigurer | IOverlayEmoteBehavior)): ILiteEvent<number>;
