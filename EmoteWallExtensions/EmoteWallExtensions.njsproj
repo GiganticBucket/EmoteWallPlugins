@@ -36,6 +36,9 @@
     <Folder Include="ts_source\" />
     <Folder Include="ts_source\GB\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\plume.jpg" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
     <VisualStudio>
