@@ -110,8 +110,9 @@ function GB_PBWaves_Setup() {
         for (let i = 0; i < numDudes; i++) {
             const longBoi = maxJumpHeightMultiplier > 1 && extendBodyWhenInAir;
             const pbEmoteData = longBoi
-                ? new EmoteData("macrop3PB", "https://gb-bot-site-frontend.vercel.app/macroPBLong.png", EmoteOriginKind.Other)
-                : new EmoteData("macrop3PB", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8c56f65d08314e6cb9f40791f5db3fe7/default/light/3.0", EmoteOriginKind.Twitch);
+                //? new EmoteData("macrop3PB", "https://gb-bot-site-frontend.vercel.app/macroPBLong.png", EmoteOriginKind.Other)
+                ? new EmoteData("macrop3PB", longBoyEmoteUrl, EmoteOriginKind.Other)
+                : new EmoteData("macrop3PB", emoteUrl, EmoteOriginKind.Twitch);
             let overlayEmote = new OverlayEmote(pbEmoteData, new OverlayEmoteState(emoteDuration), new EmoteConfigurerList(new PBConfigurer(horizontalSpaceOccupiedByWave, Math.floor(dimensionsForIndividualPBs * i))), new EmoteBehaviorList(new PBBehavior(horizontalSpaceOccupiedByWave, singleJumpDurationSeconds, maxJumpHeightMultiplier)));
             await ActiveEmotesManager.startOverlayEmotes([overlayEmote]);
             await sleep(secondsBetweenPBs * 1000);
@@ -131,17 +132,26 @@ function GB_PBWaves_Setup() {
     async function launchCrowdWithSmallWave() {
         launchWaveCrowd(50, 120);
         await sleep(1000);
-        launchPBWave(16, 1, 1.5, 2.2, 2.2, true);
+        launchPBWave(16, 1, 1.5, 2.2, 1.8, true);
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
     }
+    const macroPBURL = "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8c56f65d08314e6cb9f40791f5db3fe7/default/light/3.0";
+    const gbYay = "https://static-cdn.jtvnw.net/emoticons/v2/306572193/default/light/3.0";
+    const gbTurnblock = "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_7da0e914b3294cf895a8ebdd12d04d03/default/light/3.0";
+    const gbHeli = "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_519580cd3a1243b8b3aff6460e2e2de5/default/light/3.0";
+    const gbCooperRoll = "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_c6b03ec35ed2489eb6dbe21dedee0a94/default/light/3.0";
+    const emoteUrl = gbHeli;
+    const gbLongBoiEmoteUrl = "C:\\Users\\dpoes\\Downloads\\gbyaylong.png";
+    const macroLongBoiEmoteUrl = "";
+    const longBoyEmoteUrl = gbLongBoiEmoteUrl;
     async function launchWaveCrowd(minDimensions = 50, maxDimensions = 200) {
         const numCrowdDudes = 400;
         const timeBetweenFirstAndLastJumpStartSeconds = 3;
         const delayBetweenDudeStartsSeconds = timeBetweenFirstAndLastJumpStartSeconds / numCrowdDudes;
         for (let i = 0; i < numCrowdDudes; i++) {
-            let pbEmoteData = new EmoteData("macrop3PB", "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8c56f65d08314e6cb9f40791f5db3fe7/default/light/3.0", EmoteOriginKind.Twitch);
+            let pbEmoteData = new EmoteData("macrop3PB", emoteUrl, EmoteOriginKind.Twitch);
             let thisDudeSingleJumpDurationSeconds = 0.8 + Math.random() * 1.5;
             let thisDudeJumpCount = 1;
             let thisDudeDimensions = minDimensions + Math.floor(Math.random() * (maxDimensions - minDimensions));
