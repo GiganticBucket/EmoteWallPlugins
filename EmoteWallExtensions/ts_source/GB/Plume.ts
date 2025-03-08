@@ -6,6 +6,7 @@ function Plume_Setup() {
     const numRowsOption = new BoundedIntegerOption("numRows", 3, 1, 20);
     const dropDurationSecondsOption = new BoundedNumericOption("dropDurationSeconds", 3, 0.01, 5);
     const timeBetweenRowsSecondsOption = new BoundedNumericOption("timeBetweenRowsSeconds", 0.3, 0.01, 5);
+    const opacityOption = new BoundedNumericOption("opacity", 0.7, 0, 1);
 
     const testButtons = [
         {
@@ -27,6 +28,7 @@ function Plume_Setup() {
             new HubConnectionHandler("RequestEmoteExtensionButtons", () => {
                 gbBotConnection.invoke("NotifyEmoteExtensionButtons", extensionName, testButtons.map(b => b.buttonText));
             }),
+            new HubConnectionHandler("DropPlumes", dropPlumes),
         ]);
 
         gbBotConnection.start();
@@ -49,7 +51,8 @@ function Plume_Setup() {
             plumesPerRowOption,
             numRowsOption,
             dropDurationSecondsOption,
-            timeBetweenRowsSecondsOption
+            timeBetweenRowsSecondsOption,
+            opacityOption
         ],
         testButtons: testButtons
     });
@@ -62,9 +65,6 @@ function Plume_Setup() {
     }
 
     async function launchPlumeRow(numPlumes: number) {
-
-        const emoteDuration = dropDurationSecondsOption.currentValue * 1000;
-
         const horizontalSpacePerColumn = window.innerWidth / numPlumes;
         const plumeDimensions = horizontalSpacePerColumn * 0.6;
         const initialLeftDistanceWithinPlumeColumn = (horizontalSpacePerColumn - plumeDimensions) / 2;
@@ -74,9 +74,9 @@ function Plume_Setup() {
         for (let i = 0; i < numPlumes; i++) {
             plumeEmotes.push(new OverlayEmote(
                 new EmoteData("lePlume", "https://giganticbucket.github.io/EmoteWallPlugins/EmoteWallExtensions/assets/plume.png", EmoteOriginKind.Other),
-                new OverlayEmoteState(emoteDuration),
+                new OverlayEmoteState(dropDurationSecondsOption.currentValue),
                 new EmoteConfigurerList(
-                    new PlumeConfigurer(plumeDimensions, horizontalSpacePerColumn * i + initialLeftDistanceWithinPlumeColumn)),
+                    new PlumeConfigurer(plumeDimensions, horizontalSpacePerColumn * i + initialLeftDistanceWithinPlumeColumn, opacityOption.currentValue)),
                 new EmoteBehaviorList(
                     new PlumeBehavior(plumeDimensions, horizontalSpacePerColumn * i, horizontalSpacePerColumn)
                 )));
@@ -90,7 +90,7 @@ function Plume_Setup() {
     }
 
     class PlumeConfigurer implements IOverlayEmoteConfigurer {
-        constructor(private _emoteDimension: number, private _leftPosition: number) {
+        constructor(private _emoteDimension: number, private _leftPosition: number, private _opacity: number) {
         }
 
         name: "PlumeConfigurer";
@@ -103,6 +103,8 @@ function Plume_Setup() {
             startingOverlayEmote.state.image.height = this._emoteDimension;
 
             startingOverlayEmote.state.image.style.zIndex = Math.floor(1 + window.innerWidth - this._emoteDimension).toString();
+
+            startingOverlayEmote.state.image.style.opacity = this._opacity.toString();
         }
     }
 
@@ -115,7 +117,7 @@ function Plume_Setup() {
         name: "PlumeBehavior";
         apply(overlayEmoteState: OverlayEmoteState): void {
             // Vertical position
-            const percentOfDropElapsed = overlayEmoteState.elapsedSeconds / (overlayEmoteState.duration / 1000);
+            const percentOfDropElapsed = overlayEmoteState.elapsedSeconds / overlayEmoteState.duration;
 
             const imageTopEnd = window.innerHeight;
             const imageTopStart = -this._imageDimension;
